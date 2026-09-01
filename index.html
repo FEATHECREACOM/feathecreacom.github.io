@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>feathecrea — 並べると、見えてくる。</title>
+<meta name="description" content="feathecrea（フェザクリエ）は、視点や時間を「並べて見る」ためのアプリをつくる個人事業です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141D19;
+  --ink-soft:#4A5A53;
+  --paper:#E9EDE7;
+  --paper-2:#F3F5F0;
+  --rule:#C3CCC2;
+  --deep:#1F4E5F;
+  --amber:#B8842E;
+  --plum:#6E4F6B;
+  --moss:#4A6B4E;
+  --lane-w:104px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  font-size:16px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+a{color:inherit}
+
+/* ---------- tick rail: the signature ---------- */
+.rail{
+  height:22px;
+  background-image:repeating-linear-gradient(
+    to right,
+    var(--rule) 0 1px,
+    transparent 1px 14px
+  );
+  background-position:bottom;
+  background-repeat:repeat-x;
+  background-size:14px 9px;
+  border-bottom:1px solid var(--rule);
+}
+
+/* ---------- header ---------- */
+header{padding:28px 0 0}
+.brandbar{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{
+  font-family:"Zen Old Mincho",serif;
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:.14em;
+}
+.brand-jp{
+  font-size:12px;
+  letter-spacing:.3em;
+  color:var(--ink-soft);
+  margin-left:12px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:400;
+}
+nav{display:flex;gap:22px;font-size:13px;letter-spacing:.08em}
+nav a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--amber)}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 72px}
+.hero h1{
+  font-family:"Zen Old Mincho",serif;
+  font-weight:900;
+  font-size:clamp(38px,7.5vw,74px);
+  line-height:1.28;
+  letter-spacing:.02em;
+}
+.hero h1 .q{color:var(--deep)}
+.hero p{
+  margin-top:32px;
+  max-width:34em;
+  color:var(--ink-soft);
+  font-size:15px;
+}
+
+/* five stacked lanes under the hero headline */
+.lanes{margin-top:56px;display:flex;flex-direction:column;gap:7px}
+.lane{
+  height:9px;
+  background:var(--rule);
+  transform-origin:left;
+  animation:grow .9s cubic-bezier(.2,.7,.2,1) both;
+}
+.lane:nth-child(1){width:88%;background:var(--deep);animation-delay:.05s}
+.lane:nth-child(2){width:66%;background:var(--amber);animation-delay:.15s}
+.lane:nth-child(3){width:77%;background:var(--moss);animation-delay:.25s}
+.lane:nth-child(4){width:52%;background:var(--plum);animation-delay:.35s}
+.lane:nth-child(5){width:40%;background:var(--ink-soft);animation-delay:.45s}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- section heads ---------- */
+.sec{padding:76px 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
+.sec-head h2{
+  font-family:"Zen Old Mincho",serif;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.16em;
+}
+.sec-head .en{
+  font-size:11px;
+  letter-spacing:.26em;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+}
+.sec-note{color:var(--ink-soft);font-size:14px;max-width:38em;margin-bottom:44px}
+
+/* ---------- product lanes ---------- */
+.item{
+  display:grid;
+  grid-template-columns:var(--lane-w) 1fr;
+  gap:0 28px;
+  padding:34px 0;
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.item:last-of-type{border-bottom:1px solid var(--rule)}
+
+.tag{
+  font-size:10px;
+  letter-spacing:.2em;
+  color:var(--ink-soft);
+  padding-top:8px;
+}
+.chip{
+  display:inline-block;
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:.14em;
+  padding:3px 9px;
+  border:1px solid currentColor;
+  border-radius:2px;
+  line-height:1.6;
+}
+.c-live{color:var(--moss)}
+.c-dev{color:var(--amber)}
+.c-soon{color:var(--ink-soft)}
+
+.item h3{
+  font-family:"Zen Old Mincho",serif;
+  font-size:23px;
+  font-weight:700;
+  letter-spacing:.04em;
+  line-height:1.5;
+}
+.item .sub{font-size:12px;color:var(--ink-soft);letter-spacing:.1em;margin-top:2px}
+.app-icon{
+  width:40px;
+  height:40px;
+  vertical-align:-10px;
+  margin-right:13px;
+  border-radius:9px;
+}
+.item p{margin-top:14px;font-size:15px;max-width:40em}
+.meta{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.meta span{
+  font-size:11px;
+  letter-spacing:.08em;
+  color:var(--ink-soft);
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  padding:3px 10px;
+  border-radius:2px;
+}
+.item a.link{
+  display:inline-block;
+  margin-top:18px;
+  font-size:13px;
+  letter-spacing:.06em;
+  color:var(--deep);
+  text-decoration:none;
+  border-bottom:1px solid var(--deep);
+  padding-bottom:1px;
+}
+.item a.link:hover,.item a.link:focus-visible{color:var(--amber);border-bottom-color:var(--amber)}
+
+/* ---------- screenshot gallery ---------- */
+.shots{
+  margin-top:24px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:12px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-color:var(--rule) var(--paper-2);
+  scrollbar-width:thin;
+}
+.shots img{
+  height:300px;
+  width:auto;
+  flex:0 0 auto;
+  display:block;
+  border:1px solid var(--rule);
+  background:var(--paper-2);
+  border-radius:2px;
+  scroll-snap-align:start;
+}
+.shots::-webkit-scrollbar{height:6px}
+.shots::-webkit-scrollbar-track{background:var(--paper-2);border-radius:3px}
+.shots::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.shots img{cursor:zoom-in;transition:opacity .2s ease}
+.shots img:hover{opacity:.82}
+.shots img:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---------- lightbox ---------- */
+.lb{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  background:rgba(20,29,25,.88);
+  cursor:zoom-out;
+}
+.lb.open{display:flex}
+.lb img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
+  border:1px solid var(--rule);
+  border-radius:2px;
+  background:var(--paper-2);
+}
+.lb-close{
+  position:absolute;
+  top:16px;
+  right:20px;
+  background:none;
+  border:none;
+  color:var(--paper);
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+  padding:8px 12px;
+  font-family:inherit;
+}
+.lb-close:hover,.lb-close:focus-visible{color:var(--amber)}
+body.lb-lock{overflow:hidden}
+
+/* accent bar per item */
+.item::before{content:none}
+.item .tag::before{
+  content:"";
+  display:block;
+  width:44px;
+  height:5px;
+  margin-bottom:14px;
+  background:var(--rule);
+}
+.i1 .tag::before{background:var(--deep)}
+.i2 .tag::before{background:var(--amber)}
+.i3 .tag::before{background:var(--moss)}
+.i4 .tag::before{background:var(--plum)}
+.i5 .tag::before{background:var(--ink-soft)}
+
+/* ---------- about / info ---------- */
+.about{background:var(--paper-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.about p{max-width:40em;font-size:15px}
+.about p + p{margin-top:18px}
+
+dl.info{margin-top:40px;display:grid;grid-template-columns:150px 1fr;gap:0}
+dl.info dt{
+  font-size:11px;
+  letter-spacing:.2em;
+  color:var(--ink-soft);
+  padding:16px 0;
+  border-top:1px solid var(--rule);
+}
+dl.info dd{
+  padding:16px 0;
+  border-top:1px solid var(--rule);
+  font-size:15px;
+}
+dl.info dd a{color:var(--deep);text-decoration:none;border-bottom:1px solid var(--rule)}
+dl.info dd a:hover{color:var(--amber)}
+
+/* ---------- footer ---------- */
+footer{padding:44px 0 60px;font-size:12px;color:var(--ink-soft);letter-spacing:.08em}
+.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+
+/* ---------- mobile ---------- */
+@media (max-width:700px){
+  .hero{padding:60px 0 48px}
+  .sec{padding:56px 0}
+  .item{grid-template-columns:1fr;gap:0}
+  .item .tag{padding-top:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .item .tag::before{margin-bottom:0}
+  .chip{margin-top:0}
+  .shots img{height:230px}
+  dl.info{grid-template-columns:1fr}
+  dl.info dt{padding:14px 0 0;border-top:1px solid var(--rule)}
+  dl.info dd{padding:0 0 14px;border-top:none}
+  nav{gap:16px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="rail"></div>
+
+<header>
+  <div class="wrap brandbar">
+    <div>
+      <span class="brand">feathecrea</span><span class="brand-jp">フェザクリエ</span>
+    </div>
+    <nav>
+      <a href="#works">つくったもの</a>
+      <a href="#civic">取り組み</a>
+      <a href="#about">この事業について</a>
+      <a href="#contact">連絡先</a>
+      <a href="legal/tokushoho.html">特定商取引法表記</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>並べると、<br><span class="q">見えてくる。</span></h1>
+    <p>
+      ひとつの意見より、五つの意見。ひとつの出来事より、三千の出来事。
+      散らばったままだと気づけないことが、横に並べた瞬間に形になる。
+      feathecrea は、そうやって新しい視点を得るための道具をつくっています。
+    </p>
+    <div class="lanes" aria-hidden="true">
+      <div class="lane"></div>
+      <div class="lane"></div>
+      <div class="lane"></div>
+      <div class="lane"></div>
+      <div class="lane"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="works">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>つくったもの</h2>
+      <span class="en">Works</span>
+    </div>
+    <p class="sec-note">
+      個人開発で、企画から実装、データの整備まで手を動かしています。
+    </p>
+
+    <div class="item i1 rv">
+      <div class="tag">
+        会話 / 相談
+        <span class="chip c-dev">開発中</span>
+      </div>
+      <div>
+        <h3><img class="app-icon" src="images/icon-sixchairs.png" alt="">Six Chairs</h3>
+        <div class="sub">iOS / Android — 日本語・English</div>
+        <p>
+          断れなくて疲れた、夜更かしが続いて朝がつらい。そういう日常の小さな困りごとを持ち込むと、
+          性格の違う五匹の猫がそれぞれの角度から言葉を返します。答えを一つに決めず、
+          共感・理解・現実的な工夫・率直な意見を並べて、今日すぐ試せる小さな一歩を一緒に探す部屋です。
+        </p>
+        <div class="meta"><span>Flutter</span><span>会話生成</span><span>日英対応</span></div>
+        <div class="shots">
+          <img src="images/sixchairs-1.jpg" alt="Six Chairs のタイトル画面" loading="lazy">
+          <img src="images/sixchairs-2.jpg" alt="Six Chairs の五匹の猫" loading="lazy">
+          <img src="images/sixchairs-3.jpg" alt="Six Chairs の相談画面" loading="lazy">
+          <img src="images/sixchairs-4.jpg" alt="Six Chairs の会話画面" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="item i2 rv">
+      <div class="tag">
+        読み物 / 議論
+        <span class="chip c-soon">公開準備中</span>
+      </div>
+      <div>
+        <h3><img class="app-icon" src="images/icon-goninkaigi.png" alt="">5人のなんでも会議</h3>
+        <div class="sub">iOS / Android — 日本語・English・한국어</div>
+        <p>
+          「お金で幸せは買えるのか」「賃貸と持ち家、結局どちらが得か」。
+          投げかけたお題を、進行役・経験者・専門家・辛口の御意見番・一般人代表の五人が、
+          本物の会議のように四ラウンドかけて議論します。結論は毎回変わります。
+          低確率で現れる隠しキャラクターもいます。
+        </p>
+        <div class="meta"><span>Flutter</span><span>バックエンド</span><span>三言語対応</span></div>
+        <div class="shots">
+          <img src="images/goninkaigi-1.jpg" alt="5人のなんでも会議 のキービジュアル" loading="lazy">
+          <img src="images/goninkaigi-2.jpg" alt="会議テーマの入力画面" loading="lazy">
+          <img src="images/goninkaigi-3.jpg" alt="五人が議論する画面" loading="lazy">
+          <img src="images/goninkaigi-4.jpg" alt="議論の最終ラウンド画面" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="item i3 rv">
+      <div class="tag">
+        写真 / 容量
+        <span class="chip c-soon">公開準備中</span>
+      </div>
+      <div>
+        <h3><img class="app-icon" src="images/icon-photorelay.png" alt="">PhotoRelay</h3>
+        <div class="sub">iOS — 日本語・English</div>
+        <p>
+          端末に数千枚たまった写真を、期間で絞り込んで圧縮し、好きな保存先へ逃がすアプリ。
+          似た写真の判定は端末内で完結するので、写真が外に出ることはありません。
+          「累計何ギガ空いたか」を数字で表示します。容量は空けたいけれど、写真は失いたくない人のために。
+        </p>
+        <div class="meta"><span>Swift / SwiftUI</span><span>Vision</span><span>端末内処理</span></div>
+        <div class="shots">
+          <img src="images/photorelay-1.jpg" alt="PhotoRelay のキービジュアル" loading="lazy">
+          <img src="images/photorelay-2.jpg" alt="PhotoRelay の書き出し設定画面" loading="lazy">
+          <img src="images/photorelay-3.jpg" alt="写真の一覧画面（サムネイルはぼかし処理をしています）" loading="lazy" data-nozoom>
+          <img src="images/photorelay-4.jpg" alt="圧縮設定の画面" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="item i4 rv">
+      <div class="tag">
+        歴史 / 資料
+        <span class="chip c-dev">開発中</span>
+      </div>
+      <div>
+        <h3><img class="app-icon" src="images/icon-raziel.png" alt="">ラジエルの樹</h3>
+        <div class="sub">iOS / Android — 日本語・English</div>
+        <p>
+          石器時代から現代までの出来事を、十五の分野レーンに並べた年表で一望できる知識アーカイブ。
+          記録は三千件を超え、それぞれに出典を紐付けています。
+          読んだ記録の割合に応じて樹が育っていく仕組みも用意する予定です。
+          人類がどんな道具を作り、どんな制度を生み、何を失ってきたか。その広がりを丸ごと渡したいと考えています。
+        </p>
+        <div class="meta"><span>Flutter</span><span>記録 3,000+</span><span>関係 4,800+</span></div>
+        <div class="shots">
+          <img src="images/raziel-1.jpg" alt="ラジエルの樹 のキービジュアル" loading="lazy">
+          <img src="images/raziel-2.jpg" alt="分野レーンに並んだ年表画面" loading="lazy">
+          <img src="images/raziel-3.jpg" alt="記録の一覧画面" loading="lazy">
+          <img src="images/raziel-4.jpg" alt="記録の詳細画面" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="item i5 rv">
+      <div class="tag">
+        動画 / 遊び
+        <span class="chip c-dev">開発中</span>
+      </div>
+      <div>
+        <h3><img class="app-icon" src="images/icon-ishiki.png" alt="">意識高い系の1日メーカー</h3>
+        <div class="sub">Web</div>
+        <p>
+          朝五時起床から深夜零時の就寝まで、一日を短い映像のコマで組み立てて、縦型動画に書き出せます。
+          白湯、瞑想、サウナ、読書。ついでに二度寝や深夜のエナジードリンクといった罠のコマも用意しました。
+          組み上がった一日には点数がつきます。きゅうりを食べると減点されます。
+        </p>
+        <div class="meta"><span>React</span><span>ブラウザ内書き出し</span><span>MP4変換</span></div>
+        <div class="shots">
+          <img src="images/ishiki-1.jpg" alt="意識高い系の1日メーカー のキービジュアル" loading="lazy">
+          <img src="images/ishiki-2.jpg" alt="コマのプレビュー画面" loading="lazy">
+          <img src="images/ishiki-3.jpg" alt="動画の書き出し設定画面" loading="lazy">
+          <img src="images/ishiki-4.jpg" alt="一日のタイムライン編集画面" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="civic" style="border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>継続している取り組み</h2>
+      <span class="en">Ongoing</span>
+    </div>
+    <p class="sec-note">
+      アプリのほかに、公開して運用を続けているものがあります。
+    </p>
+
+    <div class="item i1 rv" style="border-bottom:1px solid var(--rule)">
+      <div class="tag">
+        災害情報
+        <span class="chip c-live">運用中</span>
+      </div>
+      <div>
+        <h3>令和8年熊本地震 被災者向け役立ちリンク集</h3>
+        <div class="sub">Web — 日本語・やさしい日本語・English・Tiếng Việt・中文</div>
+        <p>
+          避難所、断水と給水、通信と充電、医療と薬局、り災証明、こころのケア。
+          必要な情報が各機関のサイトに散らばっていて探しづらい状況だったため、
+          自治体・省庁・報道の一次情報へのリンクを目的別に整理して公開しています。
+          地震発生の翌日にあたる2026年7月29日に公開し、状況が動くたびに更新を続けています。
+          五つの言語で読めるようにしているのは、必要な人に届かなければ意味がないからです。
+        </p>
+        <div class="meta"><span>2026年7月29日 公開</span><span>5言語</span><span>随時更新</span></div>
+        <a class="link" href="https://feathecrea.github.io/links/" target="_blank" rel="noopener">リンク集を見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec about" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>この事業について</h2>
+      <span class="en">About</span>
+    </div>
+    <p>
+      feathecrea（フェザクリエ）は、スマートフォン向けアプリケーションおよびWebサービスの
+      企画・開発・配信を行う個人事業です。企画から実装、データ整備、ストア運用までを一人で担当しています。
+    </p>
+    <p>
+      つくるものに共通しているのは、視点や時間や記録を横に並べて見せるという形です。
+      一つの正解を提示するより、複数を並べたときに読み手の中で立ち上がる新しい視点の方を信じています。
+    </p>
+
+    <dl class="info" id="contact">
+      <dt>屋号</dt>
+      <dd>feathecrea（フェザクリエ）</dd>
+
+      <dt>事業内容</dt>
+      <dd>スマートフォン向けアプリケーションの開発・配信・販売および運用<br>Webサイトの構築・運営</dd>
+
+      <dt>所在地</dt>
+      <dd>〒105-0013<br>東京都港区浜松町2丁目2番15号 浜松町ダイヤビル2F</dd>
+
+      <dt>開業</dt>
+      <dd>2026年7月</dd>
+
+      <dt>連絡先</dt>
+      <dd><a href="mailto:feathecrea@outlook.com">feathecrea@outlook.com</a></dd>
+    </dl>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="拡大表示">
+  <button class="lb-close" type="button" aria-label="閉じる">&times;</button>
+  <img src="" alt="">
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 feathecrea</span>
+    <span>お問い合わせは上記メールアドレスまで</span>
+    <span><a href="legal/tokushoho.html">特定商取引法に基づく表記</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function(el){ el.classList.add('on'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function(el){ io.observe(el); });
+})();
+
+/* lightbox */
+(function(){
+  var lb = document.getElementById('lb');
+  if (!lb) return;
+  var lbImg = lb.querySelector('img');
+  var closeBtn = lb.querySelector('.lb-close');
+  var opener = null;
+
+  var targets = document.querySelectorAll('.shots img:not([data-nozoom])');
+  targets.forEach(function(img){
+    img.tabIndex = 0;
+    img.setAttribute('role','button');
+    function open(){
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('open');
+      document.body.classList.add('lb-lock');
+      opener = img;
+      closeBtn.focus();
+    }
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  });
+
+  /* images excluded from zoom get a plain cursor */
+  document.querySelectorAll('.shots img[data-nozoom]').forEach(function(img){
+    img.style.cursor = 'default';
+  });
+
+  function close(){
+    lb.classList.remove('open');
+    document.body.classList.remove('lb-lock');
+    lbImg.src = '';
+    if (opener) { opener.focus(); opener = null; }
+  }
+  lb.addEventListener('click', close);
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lb.classList.contains('open')) close();
+  });
+})();
+</script>
+
+</body>
+</html>

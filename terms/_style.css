@@ -1,0 +1,19 @@
+:root{--ink:#141D19;--ink-soft:#4A5A53;--paper:#E9EDE7;--paper-2:#F3F5F0;--rule:#C3CCC2;--deep:#1F4E5F}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:48px 24px 96px}
+a{color:var(--deep)}
+h1{font-family:"Zen Old Mincho",serif;font-size:28px;line-height:1.5;font-weight:700;margin-bottom:8px}
+h2{font-family:"Zen Old Mincho",serif;font-size:19px;margin:36px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+p,li{color:var(--ink-soft)}
+p{margin-bottom:12px}
+ul{margin:0 0 12px 1.2em}
+li{margin-bottom:6px}
+.meta{font-size:13px;color:var(--ink-soft);margin-bottom:28px}
+.lang{display:flex;gap:8px;margin-bottom:28px}
+.lang button{font:inherit;font-size:14px;padding:6px 16px;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink-soft);border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.note{background:var(--paper-2);border-left:3px solid var(--deep);padding:14px 18px;margin:20px 0}
+.note p:last-child{margin-bottom:0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:13px}
+[hidden]{display:none!important}
