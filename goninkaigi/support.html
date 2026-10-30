@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja" class="lang-ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サポート | 5人のなんでも会議</title>
+<style>
+  :root {
+    --bg: #faf9f7;
+    --card: #ffffff;
+    --text: #2b2b2b;
+    --muted: #6b6b6b;
+    --accent: #4A90D9;
+    --border: #e6e3dd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+  }
+  .lang-switch {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .lang-switch button {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .lang-switch button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 24px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 1.05rem;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #f2f6fb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+  .contact-box a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .contact-box a:hover { text-decoration: underline; }
+  .faq-item {
+    margin-bottom: 18px;
+  }
+  .faq-item:last-child { margin-bottom: 0; }
+  .faq-q {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .faq-q::before {
+    content: "Q. ";
+    color: var(--accent);
+  }
+  .faq-a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .faq-a::before {
+    content: "A. ";
+    color: var(--muted);
+    font-weight: 600;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 32px;
+  }
+  .disclaimer {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: -6px;
+    margin-bottom: 32px;
+  }
+  html [data-lang] { display: none; }
+  html.lang-ja [data-lang="ja"] { display: block; }
+  html.lang-en [data-lang="en"] { display: block; }
+  html.lang-ko [data-lang="ko"] { display: block; }
+  html.lang-ja [data-lang="ja"].contact-box { display: flex; }
+  html.lang-en [data-lang="en"].contact-box { display: flex; }
+  html.lang-ko [data-lang="ko"].contact-box { display: flex; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="lang-switch">
+      <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+      <button id="btn-en" onclick="setLang('en')">English</button>
+      <!-- 韓国語は、翻訳品質とテストを見きれないうちは提供しない判断（2026-08-16）。
+           本文の data-lang="ko" は残してあるので、このボタンを戻すだけで再開できる。 -->
+      <button id="btn-ko" onclick="setLang('ko')" hidden>한국어</button>
+    </div>
+
+    <header>
+      <h1 data-lang="ja">5人のなんでも会議</h1>
+      <h1 data-lang="en">The 5-Person Roundtable</h1>
+      <h1 data-lang="ko">5인의 무엇이든 회의</h1>
+      <p data-lang="ja">サポートページ</p>
+      <p data-lang="en">Support Page</p>
+      <p data-lang="ko">지원 페이지</p>
+    </header>
+
+    <p class="disclaimer" data-lang="ja">※本アプリはフィクションです。会議内で語られる情報は最新でない場合があります。エンターテインメントとしてお楽しみください。<br>不適切なテーマの入力や、本アプリの不正利用が確認された場合、利用をお断りする場合があります。</p>
+    <p class="disclaimer" data-lang="en">This app is a work of fiction. Information discussed in the meetings may not be up to date — please enjoy it purely as entertainment.<br>We may restrict access if we detect inappropriate topic submissions or misuse of the app.</p>
+    <p class="disclaimer" data-lang="ko">※본 앱은 픽션입니다. 회의 중 언급되는 정보는 최신이 아닐 수 있습니다. 엔터테인먼트로 즐겨주세요.<br>부적절한 주제 입력이나 본 앱의 부정 이용이 확인될 경우 이용을 제한할 수 있습니다.</p>
+
+    <div class="card">
+      <h2 data-lang="ja">お問い合わせ</h2>
+      <h2 data-lang="en">Contact</h2>
+      <h2 data-lang="ko">문의</h2>
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;" data-lang="ja">
+        不具合報告・ご意見・ご要望など、お気軽にご連絡ください。
+      </p>
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;" data-lang="en">
+        Feel free to reach out with bug reports, feedback, or requests.
+      </p>
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;" data-lang="ko">
+        오류 신고, 의견, 요청 등 편하게 연락해 주세요.
+      </p>
+      <div class="contact-box" data-lang="ja">
+        <span>メール</span>
+        <a href="mailto:contact@feathecrea.com">contact@feathecrea.com</a>
+      </div>
+      <div class="contact-box" data-lang="en">
+        <span>Email</span>
+        <a href="mailto:contact@feathecrea.com">contact@feathecrea.com</a>
+      </div>
+      <div class="contact-box" data-lang="ko">
+        <span>이메일</span>
+        <a href="mailto:contact@feathecrea.com">contact@feathecrea.com</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-lang="ja">よくある質問</h2>
+      <h2 data-lang="en">FAQ</h2>
+      <h2 data-lang="ko">자주 묻는 질문</h2>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">このアプリは何ができるの？</p>
+        <p class="faq-a">入力したテーマについて、5人の登場人物（進行役・辛口御意見番・経験者A・専門家B・一般人代表C）が架空の会議形式で議論する様子を読めるアプリです。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">What does this app do?</p>
+        <p class="faq-a">You enter a topic, and five fictional characters (a Facilitator, a Blunt Critic, an Experienced Voice, an Expert, and an Everyday Rep) debate it in the format of a meeting.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">이 앱은 무엇을 할 수 있나요?</p>
+        <p class="faq-a">입력한 주제에 대해 5명의 등장인물(진행자·독설 평론가·경험자 A·전문가 B·일반인 대표 C)이 가상의 회의 형식으로 토론하는 모습을 읽을 수 있는 앱입니다.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">会議の内容は本当のことですか？</p>
+        <p class="faq-a">いいえ、フィクションです。登場人物の発言はすべてAIが生成した架空のものであり、実在の出来事・統計・人物とは関係ありません。会議内で語られる情報が最新でない場合もありますので、エンターテインメントとしてお楽しみください。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">Is the content of the meetings real?</p>
+        <p class="faq-a">No, it's entirely fictional. Every line is AI-generated and unrelated to real events, statistics, or people. Information discussed may not be current, so please treat it as entertainment.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">회의 내용은 실제인가요?</p>
+        <p class="faq-a">아니요, 픽션입니다. 등장인물의 발언은 모두 AI가 생성한 가상의 내용이며, 실제 사건·통계·인물과는 관련이 없습니다. 회의 중 언급되는 정보가 최신이 아닐 수도 있으니 엔터테인먼트로 즐겨주세요.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">広告が表示されるのはなぜですか？</p>
+        <p class="faq-a">自由入力テーマの会議生成や深掘り会議などではAIモデルを利用し、サーバー側で費用が発生します。一部の用意済みテーマは、事前に作成した会議内容を配信します。広告はサービス運営費の一部をまかなうために表示しています。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">Why do ads appear?</p>
+        <p class="faq-a">Generating meetings from custom topics and using features such as deep-dive meetings can incur AI costs on our server. Some pre-made topics serve meeting content prepared in advance. Ads help cover part of the cost of running the service.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">광고는 왜 표시되나요?</p>
+        <p class="faq-a">직접 입력한 주제로 회의를 생성하거나 심층 회의 등의 기능을 사용하면 서버에서 AI 비용이 발생할 수 있습니다. 일부 미리 준비된 주제는 사전에 만든 회의 내용을 제공합니다. 광고는 서비스 운영 비용의 일부를 충당하는 데 도움이 됩니다.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">「広告なしプラン」に入るとどうなりますか？</p>
+        <p class="faq-a">広告を見ずに会議を進められ、保存された会議履歴の閲覧、じっくり会議、結論の深掘り会議、しっかりモード・お笑いモードも利用できます。履歴自体は未加入でも端末内に保存されますが、履歴画面からの閲覧は加入者向けです。アプリ内の「広告なしプラン」からご確認いただけます。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">What do I get with the "Ad-Free Plan"?</p>
+        <p class="faq-a">You can continue meetings without watching ads and access saved meeting history, Deep Meeting, deep-dive meetings, Focus Mode, and Comedy Mode. History is saved on your device even without a subscription, but opening the history screen is a subscriber feature. See "Ad-Free Plan" in the app.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">'광고 없는 플랜'에 가입하면 무엇이 좋아지나요?</p>
+        <p class="faq-a">광고를 보지 않고 회의를 진행하고 저장된 회의 기록 열람, 심층 회의, 결론의 추가 심층 회의, 진지 모드·코미디 모드를 이용할 수 있습니다. 기록 자체는 미가입자도 기기에 저장되지만 기록 화면 열람은 가입자 전용입니다. 앱 내 '광고 없는 플랜'에서 확인하실 수 있습니다.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">言語は切り替えられますか？</p>
+        <p class="faq-a">はい。テーマ入力画面の上部で日本語／Englishを切り替えられます。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">Can I switch the language?</p>
+        <p class="faq-a">Yes. You can switch between Japanese and English at the top of the theme input screen.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">언어를 변경할 수 있나요?</p>
+        <p class="faq-a">네. 주제 입력 화면 상단에서 日本語와 English를 전환할 수 있습니다.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">入力したテーマや個人情報はどう扱われますか？</p>
+        <p class="faq-a">入力いただいたテーマ文章は、当方のサーバーを経由してAIサービス（OpenAI・Anthropic）へ送信されます。詳しくは<a href="privacy.html">プライバシーポリシー</a>をご確認ください。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">How is my submitted topic or personal information handled?</p>
+        <p class="faq-a">The topic text you submit is sent through our server to AI services (OpenAI and Anthropic). See our <a href="privacy.html">Privacy Policy</a> for details.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">입력한 주제나 개인정보는 어떻게 처리되나요?</p>
+        <p class="faq-a">입력하신 주제 텍스트는 당사 서버를 거쳐 AI 서비스(OpenAI·Anthropic)로 전송됩니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 확인해 주세요.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">不具合を見つけました。どこに報告すればいいですか？</p>
+        <p class="faq-a">上記のメールアドレスまでご連絡ください。発生した状況（テーマ・操作内容など）を添えていただけるとスムーズに調査できます。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">I found a bug. Where should I report it?</p>
+        <p class="faq-a">Please contact us at the email address above. Including details of what happened (the topic used, the steps you took, etc.) helps us investigate faster.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">오류를 발견했습니다. 어디에 신고하면 되나요?</p>
+        <p class="faq-a">위의 이메일 주소로 연락해 주세요. 발생한 상황(사용한 주제, 조작 내용 등)을 함께 알려주시면 원활하게 조사할 수 있습니다.</p>
+      </div>
+
+      <div class="faq-item" data-lang="ja">
+        <p class="faq-q">AIが不適切な発言・内容を生成した場合はどうすればいいですか？</p>
+        <p class="faq-a">申し訳ございません。上記のメールアドレスまで、該当のテーマ・発言内容を添えてご連絡ください。内容を確認のうえ、生成ルールの改善やフィルタリングの強化など、必要な対応を行います。</p>
+      </div>
+      <div class="faq-item" data-lang="en">
+        <p class="faq-q">What should I do if the AI generates inappropriate content?</p>
+        <p class="faq-a">We apologize for the inconvenience. Please contact us at the email address above with the topic and the specific content in question. We will review it and take appropriate action, such as improving our generation rules or filtering.</p>
+      </div>
+      <div class="faq-item" data-lang="ko">
+        <p class="faq-q">AI가 부적절한 발언·내용을 생성한 경우 어떻게 해야 하나요?</p>
+        <p class="faq-a">불편을 드려 죄송합니다. 위의 이메일 주소로 해당 주제와 발언 내용을 함께 보내주세요. 내용을 확인한 후 생성 규칙 개선, 필터링 강화 등 필요한 조치를 취하겠습니다.</p>
+      </div>
+    </div>
+
+    <footer data-lang="ja">
+      © 5人のなんでも会議
+    </footer>
+    <footer data-lang="en">
+      © The 5-Person Roundtable
+    </footer>
+    <footer data-lang="ko">
+      © 5인의 무엇이든 회의
+    </footer>
+  </div>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.classList.remove('lang-ja', 'lang-en', 'lang-ko');
+      document.documentElement.classList.add('lang-' + lang);
+      document.documentElement.lang = lang;
+      document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+    }
+  </script>
+</body>
+</html>
