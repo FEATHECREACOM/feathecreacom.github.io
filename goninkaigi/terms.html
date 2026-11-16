@@ -120,6 +120,7 @@
   html.lang-en [data-lang="en"].contact-box { display: flex; }
   html.lang-ko [data-lang="ko"].contact-box { display: flex; }
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -132,7 +133,7 @@
 
     <header>
       <h1 data-lang="ja">5人のなんでも会議</h1>
-      <h1 data-lang="en">The 5-Person Roundtable</h1>
+      <h1 data-lang="en">Five Minds, One Topic</h1>
       <p data-lang="ja">利用規約</p>
       <p data-lang="en">Terms of Use</p>
     </header>
@@ -142,7 +143,7 @@
 
     <div class="card">
       <p data-lang="ja">本規約は、feathecrea（以下「当方」）が提供するアプリケーション「5人のなんでも会議」（以下「本アプリ」）の利用条件を定めるものです。本アプリを利用された方は、本規約に同意したものとみなします。</p>
-      <p data-lang="en">These Terms govern your use of the application "The 5-Person Roundtable" (the "App") provided by feathecrea ("we", "us"). By using the App, you agree to these Terms.</p>
+      <p data-lang="en">These Terms govern your use of the application "Five Minds, One Topic" (the "App") provided by feathecrea ("we", "us"). By using the App, you agree to these Terms.</p>
     </div>
 
     <div class="card">
@@ -268,19 +269,26 @@
       © 5人のなんでも会議
     </footer>
     <footer data-lang="en">
-      © The 5-Person Roundtable
+      © Five Minds, One Topic
     </footer>
   </div>
 
   <script>
     function setLang(lang) {
+      if (lang !== 'ja' && lang !== 'en') return;
       document.documentElement.classList.remove('lang-ja', 'lang-en', 'lang-ko');
       document.documentElement.classList.add('lang-' + lang);
       document.documentElement.lang = lang;
-      document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      ['ja', 'en'].forEach(function(code){
+        var button = document.getElementById('btn-' + code);
+        if (button) {
+          button.classList.toggle('active', code === lang);
+          button.setAttribute('aria-pressed', String(code === lang));
+        }
+      });
+      FeathecreaLanguage.save(lang);
     }
+    setLang(FeathecreaLanguage.get());
   </script>
 </body>
 </html>

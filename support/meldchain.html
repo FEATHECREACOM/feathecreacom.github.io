@@ -21,6 +21,7 @@ footer .sep{color:var(--rule)}
   footer .sep{display:none}
 }
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -32,10 +33,10 @@ footer .sep{color:var(--rule)}
 
 <section id="ja">
   <h1>MELD CHAIN サポート</h1>
-  <p class="meta">最終更新：2026年9月23日</p>
+  <p class="meta">最終更新：2026年11月16日</p>
 
   <h2>MELD CHAINとは</h2>
-  <p>6×6の盤面をなぞって「面子」を作り、好きなタイミングでまとめて放出して戦うパズルRPGです。10の職業から4人を編成し、敵ごとに異なるギミックを攻略していきます。</p>
+  <p>6×6の盤面をなぞって「面子」を作り、好きなタイミングでまとめて放出して戦うパズルRPGです。様々な職業から4人を編成し、敵ごとに異なるギミックを攻略していきます。</p>
 
   <h2>購入したコンテンツが反映されない</h2>
   <p>アプリ内の「購入を復元する」をお試しください。購入時と同じApple IDでサインインしている必要があります。</p>
@@ -60,10 +61,10 @@ footer .sep{color:var(--rule)}
 
 <section id="en" hidden>
   <h1>MELD CHAIN Support</h1>
-  <p class="meta">Last updated: September 23, 2026</p>
+  <p class="meta">Last updated: November 16, 2026</p>
 
   <h2>About MELD CHAIN</h2>
-  <p>A puzzle RPG where you trace a 6×6 board to build melds, then release them together whenever you choose. Form a party of four from ten jobs and overcome each enemy's unique gimmicks.</p>
+  <p>A puzzle RPG where you trace a 6×6 board to build melds, then release them together whenever you choose. Form a party of 4 from a variety of jobs and overcome each enemy's unique gimmicks.</p>
 
   <h2>My purchase is not reflected</h2>
   <p>Tap "Restore Purchase" in the app while signed in with the same Apple ID you used to buy.</p>
@@ -94,10 +95,11 @@ footer .sep{color:var(--rule)}
     document.getElementById('ja').hidden = (lang !== 'ja');
     document.getElementById('en').hidden = (lang !== 'en');
     document.documentElement.lang = lang;
+    FeathecreaLanguage.save(lang);
     buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
   }
   buttons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.lang); }); });
-  if ((navigator.language || '').slice(0,2) !== 'ja') show('en');
+  show(FeathecreaLanguage.get());
 })();
 </script>
 </body>

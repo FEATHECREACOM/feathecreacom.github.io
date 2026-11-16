@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>feathecrea — 楽しいを、形にしていく。</title>
+<link rel="canonical" href="https://feathecrea.com/">
+<meta property="og:site_name" content="feathecrea">
+<meta property="og:title" content="feathecrea — 楽しいを、形にしていく。">
+<meta property="og:description" content="ゲームとアプリを企画から絵・音・実装まで一貫して手がける制作スタジオ。Games and apps by feathecrea.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://feathecrea.com/">
+<meta property="og:image" content="https://feathecrea.com/images/feathecrea-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="feathecrea — Making fun take shape. MELD CHAIN, PULSE WRECKER, Five Minds, One Topic.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://feathecrea.com/images/feathecrea-og.jpg">
 <meta name="description" content="feathecrea（フェザクリエ）は、ゲームとアプリを企画から絵・音・実装まで一貫して手がける制作スタジオです。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -356,7 +368,36 @@ footer{padding:44px 0 60px;font-size:12px;color:var(--ink-soft);letter-spacing:.
 .lang-switch button[aria-pressed="true"]{background:var(--deep);color:#fff}
 .lang-switch button:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
 html[lang="en"] .brand-jp{display:none}
+
+/* Easier discovery while preserving the original typography and palette. */
+.hero{padding:48px 0 36px}
+.hero p{margin-top:20px;max-width:38em}
+.hero-cta{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;color:var(--deep);text-underline-offset:5px;font-size:14px}
+.work-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:560px;gap:12px;margin-top:22px}
+.work-preview a{display:flex;align-items:center;gap:10px;padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;text-decoration:none;white-space:normal;letter-spacing:0;font-size:12px;line-height:1.5}
+.work-preview a:hover,.work-preview a:focus-visible{border-color:var(--deep);background:#fff}
+.work-preview img{flex:none;width:44px;height:44px;border-radius:10px}
+.lanes{margin-top:28px;gap:4px;max-width:560px}
+.lane{height:4px}
+#works{padding-top:36px}
+.item{scroll-margin-top:20px}
+.product-summary{font-weight:500}
+.item .price-note{font-size:13px;color:var(--ink-soft);margin-top:12px}
+.product-details{margin-top:22px;font-size:14px}
+.product-details summary{cursor:pointer;color:var(--deep);padding:10px 0;min-height:44px}
+.product-details p{font-size:14px;color:var(--ink-soft)}
+@media(max-width:700px){
+  .hero{padding:30px 0 24px}
+  .hero p{margin-top:16px}
+  .hero-cta{margin-top:10px}
+  .work-preview{gap:8px;margin-top:14px}
+  .work-preview a{flex-direction:column;align-items:flex-start;padding:10px 8px;font-size:11px}
+  .work-preview img{width:40px;height:40px}
+  .lanes{margin-top:20px}
+  .sec-note{margin-bottom:24px}
+}
 </style>
+<script src="assets/site-language.js"></script>
 </head>
 <body>
 
@@ -387,15 +428,13 @@ html[lang="en"] .brand-jp{display:none}
 <section class="hero">
   <div class="wrap">
     <h1 data-en="Making fun&lt;br&gt;&lt;span class=&quot;q&quot;&gt;take shape.&lt;/span&gt;">楽しいを、<br><span class="q">形にしていく。</span></h1>
-    <p data-en="
-      A puzzle RPG, a third-person action shooter, and a meeting app where 5 AI characters debate.
-      Different genres, each one built to be fun.
-      feathecrea is a game and app studio that handles everything in-house, from planning to art, sound and code.
-    ">
-      パズルRPG、TPSアクションガンシューティング、5人のAIキャラが議論する会議アプリ。
-      様々なジャンルの楽しさを作り上げています。
-      feathecrea は企画から絵・音・実装までを一貫して手がけるゲームとアプリの制作スタジオです。
-    </p>
+    <p data-en="feathecrea is a game and app studio. From planning to art, sound and code, everything is handled in-house.">feathecrea はゲームとアプリの制作スタジオです。企画から絵・音・実装まで、一貫して手がけています。</p>
+    <a class="hero-cta" href="#works" data-en="Explore the games &amp; apps ↓">ゲームとアプリを見る ↓</a>
+    <nav class="work-preview" aria-label="配信中の作品" data-en-aria-label="Available games and apps">
+      <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span>MELD CHAIN</span></a>
+      <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span>PULSE WRECKER</span></a>
+      <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span data-en="Five Minds, One Topic">5人のなんでも会議</span></a>
+    </nav>
     <div class="lanes" aria-hidden="true">
       <div class="lane"></div>
       <div class="lane"></div>
@@ -418,7 +457,7 @@ html[lang="en"] .brand-jp{display:none}
       企画から実装、データの整備まで、一貫して手がけています。
     </p>
 
-    <div class="item i1 rv">
+    <div class="item i1 rv" id="meldchain">
       <div class="tag">
         <span data-en="Puzzle / RPG">パズル / RPG</span>
         <span class="chip c-live" data-en="Out now">配信中</span>
@@ -426,6 +465,22 @@ html[lang="en"] .brand-jp{display:none}
       <div>
         <h3><img class="app-icon" src="images/icon-meldchain.png" alt="">MELD CHAIN</h3>
         <div class="sub" data-en="Out now on Android (iOS coming soon) — Japanese / English">Android版公開中（iOS版 近日公開予定）— 日本語・English</div>
+        <p class="product-summary" data-en="Trace panels, form melds and release them together in a panel-chain RPG.">なぞって面子を組み、まとめて放つパネルチェインRPG。</p>
+        <div class="shots">
+          <img src="images/meldchain-1.jpg" data-en-alt="Board with panels chained diagonally into melds" alt="パネルを斜めにつないで面子を組む盤面" loading="lazy">
+          <img src="images/meldchain-2.jpg" data-en-alt="A Time Mage skill cut-in" alt="時魔士のスキル演出" loading="lazy">
+          <img src="images/meldchain-3.jpg" data-en-alt="Defeating an enemy with 146,272 damage" alt="146,272ダメージで敵を撃破する場面" loading="lazy">
+          <img src="images/meldchain-4.jpg" data-en-alt="A dragon boss appears" alt="ドラゴンのボスが登場する場面" loading="lazy">
+        </div>
+        <p class="price-note" data-en="First 10 dungeons free. Full version: one-time purchase, no extra charges or ads.">最初の10ダンジョンは無料。完全版は買い切り・追加課金なし・広告なし。</p>
+
+        <div class="store-links" data-en-aria-label="Download MELD CHAIN" aria-label="MELD CHAINをダウンロード">
+          <a href="https://play.google.com/store/apps/details?id=com.feathecrea.meldchain" data-en="Get it on Google Play">Google Playでダウンロード</a>
+        </div>
+        <p><a class="link" href="meldchain/" data-en="Watch the trailer →">トレーラー動画を見る →</a>　<a class="link" href="support/meldchain.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
+
+        <details class="product-details">
+          <summary data-en="More about this app">詳しい紹介を見る</summary>
         <p data-en="
           A panel-chain RPG where you trace panels vertically, horizontally and diagonally to form melds, then release them all at once to defeat enemies.
           The longer you chain one kind—or the more kinds you combine—the stronger the hit, and stacking skills from a variety of jobs leads to massive damage.
@@ -436,20 +491,11 @@ html[lang="en"] .brand-jp{display:none}
           最初の10ダンジョンは無料で遊べます。完全版は買い切り（追加課金・広告なし）で、50以上のダンジョンに挑戦できます。
         </p>
         <div class="meta"><span>Flutter</span><span data-en="JP / EN">日英対応</span></div>
-        <div class="store-links" data-en-aria-label="Download MELD CHAIN" aria-label="MELD CHAINをダウンロード">
-          <a href="https://play.google.com/store/apps/details?id=com.feathecrea.meldchain" data-en="Get it on Google Play">Google Playでダウンロード</a>
-        </div>
-        <p><a class="link" href="meldchain/" data-en="Watch the trailer →">トレーラー動画を見る →</a>　<a class="link" href="support/meldchain.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
-        <div class="shots">
-          <img src="images/meldchain-1.jpg" data-en-alt="Board with panels chained diagonally into melds" alt="パネルを斜めにつないで面子を組む盤面" loading="lazy">
-          <img src="images/meldchain-2.jpg" data-en-alt="A Time Mage skill cut-in" alt="時魔士のスキル演出" loading="lazy">
-          <img src="images/meldchain-3.jpg" data-en-alt="Defeating an enemy with 146,272 damage" alt="146,272ダメージで敵を撃破する場面" loading="lazy">
-          <img src="images/meldchain-4.jpg" data-en-alt="A dragon boss appears" alt="ドラゴンのボスが登場する場面" loading="lazy">
-        </div>
+        </details>
       </div>
     </div>
 
-    <div class="item i4 rv">
+    <div class="item i4 rv" id="pulsewrecker">
       <div class="tag">
         <span data-en="Action / TPS">アクション / TPS</span>
         <span class="chip c-live" data-en="Out now">配信中</span>
@@ -457,6 +503,22 @@ html[lang="en"] .brand-jp{display:none}
       <div>
         <h3><img class="app-icon" src="images/icon-pulsewrecker.png" alt="">PULSE WRECKER</h3>
         <div class="sub" data-en="Out now on iOS (Android coming soon) — Japanese / English">iOS版公開中（Android版 近日公開予定）— 日本語・English</div>
+        <p class="product-summary" data-en="Take on giant robots with a single gun: break parts, dodge attacks and target the core.">銃一本で巨大ロボに挑む、部位破壊と回避のTPSアクション。</p>
+        <div class="shots">
+          <img src="images/pulsewrecker-1.jpg" data-en-alt="PULSE WRECKER boss battle" alt="PULSE WRECKER のボス戦画面" loading="lazy">
+          <img src="images/pulsewrecker-2.jpg" data-en-alt="Fighting a flying wyvern boss" alt="空を飛ぶボス・ワイバーンとの戦闘画面" loading="lazy">
+          <img src="images/pulsewrecker-3.jpg" data-en-alt="PULSE WRECKER home screen" alt="PULSE WRECKER のホーム画面" loading="lazy">
+          <img src="images/pulsewrecker-4.jpg" data-en-alt="Story dialogue screen" alt="ストーリーの会話画面" loading="lazy">
+        </div>
+        <p class="price-note" data-en="First half of the story free. Full version: one-time purchase, no extra charges or ads.">ストーリーの前半は無料。完全版は買い切り・追加課金なし・広告なし。</p>
+
+        <div class="store-links" data-en-aria-label="Download PULSE WRECKER" aria-label="PULSE WRECKERをダウンロード">
+          <a href="https://apps.apple.com/jp/app/pulse-wrecker/id6832169696" data-en="Download on the App Store">App Storeでダウンロード</a>
+        </div>
+        <p><a class="link" href="pulsewrecker/" data-en="Watch the trailer →">トレーラー動画を見る →</a>　<a class="link" href="pulsewrecker/support.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
+
+        <details class="product-details">
+          <summary data-en="More about this app">詳しい紹介を見る</summary>
         <p data-en="
           A third-person action shooter where you take on towering giant robots with a single gun.
           Dodge enemy attacks with jumps and dashes, destroy specific parts, and shoot the core, their weak point.
@@ -467,20 +529,11 @@ html[lang="en"] .brand-jp{display:none}
           ストーリーの前半は無料で遊べます。完全版は買い切り（追加課金・広告なし）で、20体以上のボスに挑戦できます。
         </p>
         <div class="meta"><span>Three.js</span><span>Capacitor</span><span data-en="JP / EN">日英対応</span></div>
-        <div class="store-links" data-en-aria-label="Download PULSE WRECKER" aria-label="PULSE WRECKERをダウンロード">
-          <a href="https://apps.apple.com/jp/app/pulse-wrecker/id6832169696" data-en="Download on the App Store">App Storeでダウンロード</a>
-        </div>
-        <p><a class="link" href="pulsewrecker/" data-en="Watch the trailer →">トレーラー動画を見る →</a>　<a class="link" href="pulsewrecker/support.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
-        <div class="shots">
-          <img src="images/pulsewrecker-1.jpg" data-en-alt="PULSE WRECKER boss battle" alt="PULSE WRECKER のボス戦画面" loading="lazy">
-          <img src="images/pulsewrecker-2.jpg" data-en-alt="Fighting a flying wyvern boss" alt="空を飛ぶボス・ワイバーンとの戦闘画面" loading="lazy">
-          <img src="images/pulsewrecker-3.jpg" data-en-alt="PULSE WRECKER home screen" alt="PULSE WRECKER のホーム画面" loading="lazy">
-          <img src="images/pulsewrecker-4.jpg" data-en-alt="Story dialogue screen" alt="ストーリーの会話画面" loading="lazy">
-        </div>
+        </details>
       </div>
     </div>
 
-    <div class="item i2 rv">
+    <div class="item i2 rv" id="goninkaigi">
       <div class="tag">
         <span data-en="Reading / Debate">読み物 / 議論</span>
         <span class="chip c-live" data-en="Out now">配信中</span>
@@ -488,6 +541,22 @@ html[lang="en"] .brand-jp{display:none}
       <div>
         <h3><img class="app-icon" src="images/icon-goninkaigi.png" alt=""><span data-en="Five Minds, One Topic">5人のなんでも会議</span></h3>
         <div class="sub" data-en="iOS / Android — Japanese / English">iOS / Android — 日本語・English</div>
+        <p class="product-summary" data-en="Give 5 AI characters a topic and discover new viewpoints as they debate.">お題を入れると、5人のAIキャラクターが議論。新しい視点に出会える会議アプリ。</p>
+        <div class="shots">
+          <img src="images/goninkaigi-1.jpg" data-en-alt="Five Minds, One Topic key visual" alt="5人のなんでも会議 のキービジュアル" loading="lazy">
+          <img src="images/goninkaigi-2.jpg" data-en-alt="Entering a meeting topic" alt="会議テーマの入力画面" loading="lazy">
+          <img src="images/goninkaigi-3.jpg" data-en-alt="Five characters debating" alt="5人が議論する画面" loading="lazy">
+          <img src="images/goninkaigi-4.jpg" data-en-alt="Final round of the debate" alt="議論の最終ラウンド画面" loading="lazy">
+        </div>
+
+        <div class="store-links" data-en-aria-label="Download Five Minds, One Topic" aria-label="5人のなんでも会議をダウンロード">
+          <a href="https://apps.apple.com/jp/app/id6790642356" data-en="Download on the App Store">App Storeでダウンロード</a>
+          <a href="https://play.google.com/store/apps/details?id=com.feathecrea.goninkaigi&amp;hl=ja" data-en="Get it on Google Play">Google Playで入手</a>
+        </div>
+        <p><a class="link" href="goninkaigi/support.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
+
+        <details class="product-details">
+          <summary data-en="More about this app">詳しい紹介を見る</summary>
         <p data-en="
           “Can money buy happiness?” “Renting or buying—which really pays off?”
           Give it a topic, and five characters—a moderator, a seasoned voice, an expert, a blunt critic and an everyday person—debate it like a real meeting.
@@ -501,21 +570,11 @@ html[lang="en"] .brand-jp{display:none}
           低確率で現れる隠しキャラクターもいます。
         </p>
         <div class="meta"><span>Flutter</span><span data-en="Backend">バックエンド</span><span data-en="JP / EN">日英対応</span></div>
-        <div class="store-links" data-en-aria-label="Download Five Minds, One Topic" aria-label="5人のなんでも会議をダウンロード">
-          <a href="https://apps.apple.com/jp/app/id6790642356" data-en="Download on the App Store">App Storeでダウンロード</a>
-          <a href="https://play.google.com/store/apps/details?id=com.feathecrea.goninkaigi&amp;hl=ja" data-en="Get it on Google Play">Google Playで入手</a>
-        </div>
-        <p><a class="link" href="goninkaigi/support.html" data-en="Support &amp; contact →">サポート・お問い合わせ →</a></p>
-        <div class="shots">
-          <img src="images/goninkaigi-1.jpg" data-en-alt="Five Minds, One Topic key visual" alt="5人のなんでも会議 のキービジュアル" loading="lazy">
-          <img src="images/goninkaigi-2.jpg" data-en-alt="Entering a meeting topic" alt="会議テーマの入力画面" loading="lazy">
-          <img src="images/goninkaigi-3.jpg" data-en-alt="Five characters debating" alt="5人が議論する画面" loading="lazy">
-          <img src="images/goninkaigi-4.jpg" data-en-alt="Final round of the debate" alt="議論の最終ラウンド画面" loading="lazy">
-        </div>
+        </details>
       </div>
     </div>
 
-    <div class="item i3 rv">
+    <div class="item i3 rv" id="photorelay">
       <div class="tag">
         <span data-en="Photos / Storage">写真 / 容量</span>
         <span class="chip c-soon" data-en="Coming soon">公開準備中</span>
@@ -523,22 +582,28 @@ html[lang="en"] .brand-jp{display:none}
       <div>
         <h3><img class="app-icon" src="images/icon-photorelay.png" alt="">PhotoRelay</h3>
         <div class="sub" data-en="iOS — Japanese / English">iOS — 日本語・English</div>
-        <p data-en="
-          Thousands of photos piling up on your phone? Filter them by date, compress them, and move them to the storage you choose.
-          Similar-photo detection runs entirely on the device, so your photos never leave it.
-          It shows how many gigabytes you’ve freed in total—for people who want space back without losing their photos.
-        ">
-          端末に数千枚たまった写真を、期間で絞り込んで圧縮し、好きな保存先へ逃がすアプリ。
-          似た写真の判定は端末内で完結するので、写真が外に出ることはありません。
-          「累計何ギガ空いたか」を数字で表示します。容量は空けたいけれど、写真は失いたくない人のために。
-        </p>
-        <div class="meta"><span>Swift / SwiftUI</span><span>Vision</span><span data-en="On-device">端末内処理</span></div>
+        <p class="product-summary" data-en="Compress photos and save them where you choose. Similar-photo detection stays on your device.">写真を圧縮して、選んだ保存先へ。似た写真の判定は端末内で完結。</p>
         <div class="shots">
           <img src="images/photorelay-1.jpg" data-en-alt="PhotoRelay key visual" alt="PhotoRelay のキービジュアル" loading="lazy">
           <img src="images/photorelay-2.jpg" data-en-alt="PhotoRelay export settings" alt="PhotoRelay の書き出し設定画面" loading="lazy">
           <img src="images/photorelay-3.jpg" data-en-alt="Photo list (thumbnails blurred)" alt="写真の一覧画面（サムネイルはぼかし処理をしています）" loading="lazy" data-nozoom>
           <img src="images/photorelay-4.jpg" data-en-alt="Compression settings" alt="圧縮設定の画面" loading="lazy">
         </div>
+
+
+        <details class="product-details">
+          <summary data-en="More about this app">詳しい紹介を見る</summary>
+        <p data-en="
+          Thousands of photos piling up on your phone? Filter them by date, compress them, and move them to the storage you choose.
+          Similar-photo detection runs entirely on the device without sending photos to an analysis server.
+          It shows how many gigabytes you’ve freed in total—for people who want space back without losing their photos.
+        ">
+          端末に数千枚たまった写真を、期間で絞り込んで圧縮し、好きな保存先へ逃がすアプリ。
+          似た写真の判定は端末内で完結し、解析のために写真を外部サーバーへ送信することはありません。
+          「累計何ギガ空いたか」を数字で表示します。容量は空けたいけれど、写真は失いたくない人のために。
+        </p>
+        <div class="meta"><span>Swift / SwiftUI</span><span>Vision</span><span data-en="On-device">端末内処理</span></div>
+        </details>
       </div>
     </div>
 
@@ -670,17 +735,13 @@ html[lang="en"] .brand-jp{display:none}
 <script>
 /* language switch: ?lang= → saved choice → browser language */
 (function(){
-  var KEY='feathecrea-lang';
   var T={ja:document.title,en:'feathecrea — Making fun take shape.'};
   var md=document.querySelector('meta[name="description"]');
   var D={ja:md?md.content:'',en:'feathecrea is a game and app studio that handles everything in-house, from planning to art, sound and code.'};
-  function pick(){
-    try{var q=new URLSearchParams(location.search).get('lang');if(q==='ja'||q==='en')return q;}catch(e){}
-    try{var v=localStorage.getItem(KEY);if(v==='ja'||v==='en')return v;}catch(e){}
-    return /^ja\b/i.test(navigator.language||'')?'ja':'en';
-  }
+  function pick(){ return FeathecreaLanguage.get(); }
   function apply(lang){
     document.documentElement.lang=lang;
+    FeathecreaLanguage.save(lang);
     document.querySelectorAll('[data-en]').forEach(function(el){
       if(!el.hasAttribute('data-ja'))el.setAttribute('data-ja',el.innerHTML);
       el.innerHTML=lang==='en'?el.getAttribute('data-en'):el.getAttribute('data-ja');
@@ -699,7 +760,6 @@ html[lang="en"] .brand-jp{display:none}
   document.querySelectorAll('[data-set-lang]').forEach(function(b){
     b.addEventListener('click',function(){
       var lang=b.getAttribute('data-set-lang');
-      try{localStorage.setItem(KEY,lang);}catch(e){}
       apply(lang);
     });
   });

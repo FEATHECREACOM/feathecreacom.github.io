@@ -21,6 +21,7 @@ footer .sep{color:var(--rule)}
   footer .sep{display:none}
 }
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -118,10 +119,11 @@ footer .sep{color:var(--rule)}
     document.getElementById('ja').hidden = (lang !== 'ja');
     document.getElementById('en').hidden = (lang !== 'en');
     document.documentElement.lang = lang;
+    FeathecreaLanguage.save(lang);
     buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
   }
   buttons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.lang); }); });
-  if ((navigator.language || '').slice(0,2) !== 'ja') show('en');
+  show(FeathecreaLanguage.get());
 })();
 </script>
 </body>

@@ -14,6 +14,7 @@ dl.info{margin-top:8px}
 dl.info dt{font-size:11px;letter-spacing:.14em;color:var(--ink-soft);padding-top:22px}
 dl.info dd{padding:6px 0 0;font-size:15px;color:var(--ink)}
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -133,10 +134,11 @@ dl.info dd{padding:6px 0 0;font-size:15px;color:var(--ink)}
     document.getElementById('ja').hidden = (lang !== 'ja');
     document.getElementById('en').hidden = (lang !== 'en');
     document.documentElement.lang = lang;
+    FeathecreaLanguage.save(lang);
     buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
   }
   buttons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.lang); }); });
-  if ((navigator.language || '').slice(0,2) !== 'ja') show('en');
+  show(FeathecreaLanguage.get());
 })();
 </script>
 </body>

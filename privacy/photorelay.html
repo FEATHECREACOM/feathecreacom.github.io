@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PhotoRelay プライバシーポリシー — feathecrea</title>
-<meta name="description" content="PhotoRelayのプライバシーポリシー。写真は端末の外に出ません。">
+<meta name="description" content="PhotoRelayのプライバシーポリシー。写真の圧縮・類似判定は端末内で行います。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="_style.css">
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -20,10 +21,10 @@
 
 <section id="ja">
   <h1>PhotoRelay プライバシーポリシー</h1>
-  <p class="meta">最終更新：2026年8月14日</p>
+  <p class="meta">最終更新：2026年11月16日</p>
 
   <div class="note">
-    <p><strong>PhotoRelayは、あなたの写真を外部に送信しません。</strong>写真の読み込み、圧縮、重複の判定まで、すべてお使いのiPhoneの中だけで完結します。</p>
+    <p><strong>写真の圧縮・重複の判定は、端末内で行います。</strong>解析のために写真を外部サーバーへ送信することはありません。</p>
   </div>
 
   <h2>収集する情報</h2>
@@ -52,7 +53,8 @@
   <p>これらはアプリを削除すると、すべて消去されます。「アプリ内」に保存された画像は、iCloudバックアップの対象から除外されています。</p>
 
   <h2>外部への送信</h2>
-  <p>本アプリは、解析ツール、広告、クラッシュレポート等の外部サービスを一切組み込んでいません。ネットワーク通信も行いません。</p>
+  <p>本アプリは、解析ツール、広告、クラッシュレポート等の外部サービスを一切組み込んでいません。解析のためのネットワーク通信は行いません。</p>
+  <p>写真の書き出しは、利用者が選択した保存先へ行います。クラウドに対応した保存先を選んだ場合、その保存先のサービスやOSの機能によって写真が転送・同期されることがあります。保存先サービスの情報の取り扱いは、各サービスのプライバシーポリシーをご確認ください。</p>
 
   <h2>お子さまの利用について</h2>
   <p>本アプリは特定の年齢層を対象としたものではなく、いかなる利用者からも個人情報を収集しません。</p>
@@ -71,10 +73,10 @@
 
 <section id="en" hidden>
   <h1>PhotoRelay Privacy Policy</h1>
-  <p class="meta">Last updated: August 14, 2026</p>
+  <p class="meta">Last updated: November 16, 2026</p>
 
   <div class="note">
-    <p><strong>PhotoRelay does not send your photos anywhere.</strong> Reading, compressing, and comparing your photos all happen entirely on your iPhone.</p>
+    <p><strong>Photo compression and duplicate detection run on your device.</strong> Photos are not sent to an external server for analysis.</p>
   </div>
 
   <h2>Information We Collect</h2>
@@ -103,7 +105,8 @@
   <p>All of this is erased when you delete the app. Images saved in the in-app library are excluded from iCloud backup.</p>
 
   <h2>Data Transmission</h2>
-  <p>The app includes no analytics, advertising, or crash-reporting services, and performs no network communication.</p>
+  <p>The app includes no analytics, advertising, or crash-reporting services, and does not use network communication for photo analysis.</p>
+  <p>Photos are exported to the destination you choose. If you choose a cloud-backed destination, its service or the operating system may transfer or sync those photos. Refer to the destination service’s privacy policy for its data handling.</p>
 
   <h2>Children</h2>
   <p>The app is not directed at any particular age group and collects no personal information from anyone.</p>
@@ -127,10 +130,11 @@
     document.getElementById('ja').hidden = (lang !== 'ja');
     document.getElementById('en').hidden = (lang !== 'en');
     document.documentElement.lang = lang;
+    FeathecreaLanguage.save(lang);
     buttons.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
   }
   buttons.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.lang); }); });
-  if ((navigator.language || '').slice(0,2) !== 'ja') show('en');
+  show(FeathecreaLanguage.get());
 })();
 </script>
 </body>

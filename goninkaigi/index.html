@@ -99,7 +99,7 @@
   .links a { color: #8a8fa0; text-decoration: none; }
   .links a:hover { text-decoration: underline; }
   .lang {
-    margin-top: 16px;
+    margin: 0 0 20px;
     font-size: 13px;
   }
   .lang button {
@@ -108,19 +108,25 @@
     color: var(--sub);
     font: inherit;
     cursor: pointer;
-    padding: 4px 6px;
+    padding: 10px 14px;
+    min-height: 44px;
   }
   .lang button[aria-pressed="true"] { color: var(--ink); font-weight: 700; }
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
   <main class="card">
+    <div class="lang" role="group" aria-label="Language / 言語">
+      <button type="button" data-lang="ja" aria-pressed="true">日本語</button> ·
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
     <img class="icon" src="icon.png" alt="" width="132" height="132">
     <h1 data-i18n="name">5人のなんでも会議</h1>
     <p class="lead" data-i18n="lead">お題を入れると、AIキャラ5人が<br>本気で会議します。</p>
 
     <div class="stores">
-      <a class="store" id="ios" href="https://apps.apple.com/app/id6790642356" rel="noopener">
+      <a class="store" id="ios" href="https://apps.apple.com/jp/app/id6790642356" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.22 1.81-3.29 1.9-3.34-1.04-1.52-2.65-1.72-3.22-1.75-1.37-.14-2.68.81-3.37.81-.7 0-1.77-.79-2.91-.77-1.5.02-2.88.87-3.65 2.21-1.56 2.7-.4 6.7 1.12 8.89.74 1.07 1.62 2.28 2.78 2.23 1.12-.04 1.54-.72 2.89-.72s1.73.72 2.91.7c1.2-.02 1.96-1.09 2.69-2.17.85-1.24 1.2-2.45 1.22-2.51-.03-.01-2.34-.9-2.36-3.58zM14.15 6.07c.61-.75 1.03-1.78.92-2.82-.89.04-1.97.6-2.6 1.34-.57.66-1.07 1.72-.94 2.73.99.08 2-.5 2.62-1.25z"/></svg>
         <span data-i18n="ios">App Store でダウンロード</span>
       </a>
@@ -137,10 +143,7 @@
       <a href="terms.html" data-i18n="terms">利用規約</a> ·
       <a href="tokushoho.html" data-i18n="tokushoho">特商法表記</a>
     </p>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-lang="ja" aria-pressed="true">日本語</button> ·
-      <button type="button" data-lang="en" aria-pressed="false">English</button>
-    </div>
+
   </main>
 
 <script>
@@ -151,7 +154,7 @@
     "https://play.google.com/store/apps/details?id=com.feathecrea.goninkaigi&referrer=" +
     encodeURIComponent("utm_source=" + src + "&utm_medium=social&utm_campaign=profile");
   document.getElementById("ios").href =
-    "https://apps.apple.com/app/id6790642356?ct=" + encodeURIComponent(src);
+    "https://apps.apple.com/jp/app/id6790642356?ct=" + encodeURIComponent(src);
 
   // Put the visitor's own store first and highlight it.
   var ua = navigator.userAgent || "";
@@ -173,9 +176,11 @@
   };
   function setLang(l) {
     document.documentElement.lang = l;
+    FeathecreaLanguage.save(l);
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       el.innerHTML = T[l][el.getAttribute("data-i18n")];
     });
+    document.getElementById('ios').href = 'https://apps.apple.com/' + (l === 'ja' ? 'jp' : 'us') + '/app/id6790642356?ct=' + encodeURIComponent(src);
     document.title = T[l].name;
     document.querySelectorAll(".lang button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === l));
@@ -184,8 +189,7 @@
   document.querySelectorAll(".lang button").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
   });
-  var q = new URLSearchParams(location.search).get("lang");
-  setLang(q === "en" || q === "ja" ? q : ((navigator.language || "ja").toLowerCase().indexOf("ja") === 0 ? "ja" : "en"));
+  setLang(FeathecreaLanguage.get());
 </script>
 </body>
 </html>

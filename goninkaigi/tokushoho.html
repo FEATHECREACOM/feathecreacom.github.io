@@ -115,6 +115,7 @@
   html.lang-en [data-lang="en"] { display: block; }
   html.lang-ko [data-lang="ko"] { display: block; }
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
   <div class="wrap">
@@ -128,7 +129,7 @@
 
     <header>
       <h1 data-lang="ja">5人のなんでも会議</h1>
-      <h1 data-lang="en">The 5-Person Roundtable</h1>
+      <h1 data-lang="en">Five Minds, One Topic</h1>
       <h1 data-lang="ko">5인의 무엇이든 회의</h1>
       <p data-lang="ja">特定商取引法に基づく表記</p>
       <p data-lang="en">Notice Based on the Act on Specified Commercial Transactions</p>
@@ -245,7 +246,7 @@
       © 5人のなんでも会議
     </footer>
     <footer data-lang="en">
-      © The 5-Person Roundtable
+      © Five Minds, One Topic
     </footer>
     <footer data-lang="ko">
       © 5인의 무엇이든 회의
@@ -254,13 +255,20 @@
 
   <script>
     function setLang(lang) {
+      if (lang !== 'ja' && lang !== 'en') return;
       document.documentElement.classList.remove('lang-ja', 'lang-en', 'lang-ko');
       document.documentElement.classList.add('lang-' + lang);
       document.documentElement.lang = lang;
-      document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      ['ja', 'en'].forEach(function(code){
+        var button = document.getElementById('btn-' + code);
+        if (button) {
+          button.classList.toggle('active', code === lang);
+          button.setAttribute('aria-pressed', String(code === lang));
+        }
+      });
+      FeathecreaLanguage.save(lang);
     }
+    setLang(FeathecreaLanguage.get());
   </script>
 </body>
 </html>

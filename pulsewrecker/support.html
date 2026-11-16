@@ -15,8 +15,8 @@ header{border-left:3px solid var(--cyan);padding-left:14px;margin-bottom:22px}
 .brand span{color:var(--cyan)}
 .sub{margin:6px 0 0;color:var(--mute);font-size:12px;letter-spacing:.3em}
 nav.lang{display:flex;gap:8px;margin:0 0 26px}
-nav.lang a{flex:0 0 auto;padding:6px 14px;border:1px solid var(--line);border-radius:4px;color:var(--ink);text-decoration:none;font-size:13px}
-nav.lang a:hover{border-color:var(--cyan)}
+nav.lang button{flex:0 0 auto;padding:6px 14px;border:1px solid var(--line);border-radius:4px;color:var(--ink);text-decoration:none;font:inherit;font-size:13px;background:none;cursor:pointer;min-height:44px}
+nav.lang button:hover{border-color:var(--cyan)}
 section.l{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px 20px;margin:0 0 22px}
 h1{margin:0 0 4px;font-size:22px;color:var(--gold)}
 .date{margin:0 0 18px;color:var(--mute);font-size:13px}
@@ -30,11 +30,12 @@ a{color:var(--cyan)}
 footer{margin-top:30px;color:var(--mute);font-size:12px;text-align:center}
 footer a{color:var(--mute)}
 </style>
+<script src="../assets/site-language.js"></script>
 </head>
 <body>
 <div class="wrap">
 <header><p class="brand">PULSE <span>WRECKER</span></p><p class="sub">FEATHECREA</p></header>
-<nav class="lang"><a href="#ja">日本語</a><a href="#en">English</a></nav>
+<nav class="lang" aria-label="Language / 言語"><button type="button" data-lang="ja">日本語</button><button type="button" data-lang="en">English</button></nav>
 <section class="l" id="ja" lang="ja">
 <h1>サポート</h1>
 <p>「PULSE WRECKER」は、金色の解体屋として銃一本で巨大な戦機に挑む、スマートフォン向けのアクションシューティングゲームです。</p>
@@ -124,5 +125,24 @@ footer a{color:var(--mute)}
 </section>
 <footer><p><a href="support.html">サポート / Support</a>　·　<a href="privacy.html">プライバシーポリシー / Privacy Policy</a>　·　<a href="https://feathecrea.com/legal/tokushoho.html">特定商取引法に基づく表記</a></p><p>© 2026 feathecrea</p></footer>
 </div>
+<script>
+(function(){
+  function show(lang){
+    document.documentElement.lang = lang;
+    ['ja','en'].forEach(function(code){ document.getElementById(code).hidden = code !== lang; });
+    document.querySelectorAll('nav.lang button').forEach(function(button){
+      var selected = button.dataset.lang === lang;
+      button.setAttribute('aria-pressed', String(selected));
+      button.style.borderColor = selected ? 'var(--cyan)' : 'var(--line)';
+    });
+    FeathecreaLanguage.save(lang);
+  }
+  document.querySelectorAll('nav.lang button').forEach(function(button){
+    button.addEventListener('click', function(){ show(button.dataset.lang); });
+  });
+  var hash = location.hash.slice(1);
+  show(hash === 'ja' || hash === 'en' ? hash : FeathecreaLanguage.get());
+})();
+</script>
 </body>
 </html>
