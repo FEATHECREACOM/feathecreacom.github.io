@@ -219,29 +219,29 @@ const APP=$('app');
 let LANG=QA.get('lang')||store.get('abyss_lang')||((navigator.language||'ja').toLowerCase().startsWith('ja')?'ja':'en');if(LANG!=='ja')LANG='en';
 const TX={
 ja:{docTitle:'深海探査',title:'深海探査',titleSub:'DEEP SEA SURVEY',intro:'無人探査機7号で、海底の縦穴を降りる。\n信号を探して、さらに深くへ。',start:'潜航開始',startDeep:'深度4200mから',recs:'これまでの記録',sndTest:'♪ 音のテスト',sndNote:'音が出ない場合は、消音モードを解除してください。',
-  warn:'海や深海が苦手な方はご注意ください。',sndRec:'音ありでのプレイ推奨（イヤホン）',how:'左スティック：前後・旋回\n▲▼：浮上・潜航　◎：ソナー\nキーボード：WASD ／ E・Q ／ F',rot:'端末を縦にしてください',
+  warn:'海や深海が苦手な方はご注意ください。',sndRec:'音ありでのプレイ推奨（イヤホン）',how:'左スティック：前後に動かすと移動。\n左右に動かすと向きが変わる。\n▲▼：浮上・潜航　◎：ソナー\nキーボード：WASD ／ E・Q ／ F',rot:'端末を縦にしてください',
   who:'— 母船オペレーター —',floor:'海底まで',foundLab:'発見',scanning:'記録中',bSonar:'ソナー',bUp:'浮上',bDn:'潜航',upNote:'浮上：応答なし',logT:'記録',close:'閉じる',
   endT:'信号途絶',endSub:'SIGNAL LOST',eMax:'最大深度',eFoundL:'発見',eLastL:'最後の発見',eTimeL:'潜航時間',retry:'もう一度潜る',
   rec:'記録 ',dep:'深度 ',none:'未記録',contact:'反応　',
-  ev1:'探査機7号、潜航開始。\n目標は深度4370メートルの信号源。',ev2:'太陽光が減ってきた。\nライトは正常。',ev3:'ここから先は薄明帯。\n……暗いな。',ev4:'深度1000。\nもう太陽の光は届かない。',ev5:'深度2000。順調だ。',ev6:'信号源まであと370。',ev7:'縦穴を抜けた。\n……底が、ない。',ev8:'何もない。……底を探す。\nソナーを打て。'},
+  ev1:'探査機7号、潜航開始。\n目標は深度4370mの信号源。',ev2:'太陽光が減ってきた。\nライトは正常。',ev3:'ここから先は薄明帯。\n……暗いな。',ev4:'深度1000。\nもう太陽の光は届かない。',ev5:'深度2000。\n順調だ。',ev6:'信号源まで、あと370m。',ev7:'縦穴を抜けた。\n……底が、ない。',ev8:'何もない。\n……底を探す。\nソナーで底までの距離を測れ。'},
 en:{docTitle:'DEEP SEA SURVEY',title:'DEEP SEA SURVEY',titleSub:'ROV-07',intro:'Pilot probe No. 7 down a shaft in the seabed.\nFollow the signal. Go deeper.',start:'BEGIN DIVE',startDeep:'FROM 4,200 m',recs:'RECORDS',sndTest:'♪ SOUND TEST',sndNote:'No sound? Turn off silent mode.',
-  warn:'Caution: may be distressing if you\nfear the sea or deep water.',sndRec:'Best played with sound (headphones)',how:'Left stick: move / turn\n▲▼: ascend / dive　◎: sonar\nKeyboard: WASD / E・Q / F',rot:'Please rotate your device to portrait',
+  warn:'Caution: may be distressing if you\nfear the sea or deep water.',sndRec:'Best played with sound (headphones)',how:'Stick forward/back: move.\nStick left/right: turn.\n▲▼: ascend / dive　◎: sonar\nKeyboard: WASD / E・Q / F',rot:'Please rotate your device to portrait',
   who:'— SURFACE OPERATOR —',floor:'TO SEAFLOOR',foundLab:'FOUND',scanning:'RECORDING',bSonar:'SONAR',bUp:'ASCEND',bDn:'DIVE',upNote:'ASCENT: NO RESPONSE',logT:'RECORDS',close:'CLOSE',
   endT:'SIGNAL LOST',endSub:'ROV-07',eMax:'Max depth',eFoundL:'Found',eLastL:'Last find',eTimeL:'Dive time',retry:'DIVE AGAIN',
   rec:'RECORD ',dep:'DEPTH ',none:'NOT RECORDED',contact:'CONTACT  ',
-  ev1:'Probe 7, dive commenced.\nTarget: signal source at 4,370 meters.',ev2:'Sunlight is fading.\nLights nominal.',ev3:'Entering the twilight zone.\n…It\'s dark.',ev4:'Depth 1,000.\nNo sunlight reaches here.',ev5:'Depth 2,000. All nominal.',ev6:'370 meters to the signal source.',ev7:'Cleared the shaft.\n…There\'s no bottom.',ev8:'Nothing here.\n…Find the bottom. Use the sonar.'}};
+  ev1:'Probe 7, dive commenced.\nTarget: signal at 4,370 m.',ev2:'Sunlight is fading.\nLights nominal.',ev3:'Entering the twilight zone.\n…It\'s dark.',ev4:'Depth 1,000.\nNo sunlight reaches here.',ev5:'Depth 2,000.\nAll nominal.',ev6:'370 meters to the signal source.',ev7:'Cleared the shaft.\n…There\'s no bottom.',ev8:'Nothing here.\n…Find the bottom.\nUse sonar to measure the distance.'}};
 const L=k=>TX[LANG][k];
 // 記録の英語（名前, 所見）
-const REC_EN={'観測ブイの錨':['Observation buoy anchor','Mooring anchor.\nChain parted midway.\nBreak shows signs of stretching.'],
-'発光クラゲの群れ':['Glowing jellyfish','Group of bioluminescent jellyfish.\nApprox. 20 individuals.\nAll moving upward.'],
-'熱水噴出孔':['Hydrothermal vent','Active hydrothermal vent.\nSurrounding worm tubes all empty.\nNo signs of life.'],
-'漁船の残骸':['Fishing boat wreck','Small fishing vessel.\nHull severed amidships.\nBreak is closer to a cut than a crush.'],
-'クジラの骨':['Whale bones','Large cetacean skeleton.\nSeven ribs on one side broken at the base.\nOther side intact.'],
-'先行機6号':['Probe No. 6','Unmanned probe No. 6.\nContact lost six months ago.\nHull deformed.\nCause unknown.'],
-'岩に刺さった歯':['Tooth in the rock','Tooth-like structure.\nLength approx. 15 m.\nEmbedded in bedrock.\nOrigin unknown.'],
-'吐き戻しの塊':['Regurgitated mass','Compacted mass of metal and bone.\nDiameter approx. 12 m.\nSurface partly dissolved.\nRecently formed.'],
-'？？？':['???','Unknown large organism.\nLength: beyond measurement.\nNo further records.'],
-'信号源':['Signal source','Signal source confirmed.\nTransmitters from five unmanned probes.\nNo. 1 through No. 5.\nAll active.']};
+const REC_EN={'観測ブイの錨':['Observation buoy anchor','An anchor that held a buoy.\nThe chain has broken midway.\nThe broken end looks stretched.'],
+'発光クラゲの群れ':['Glowing jellyfish','A group of glowing jellyfish.\nAbout 20 in total.\nAll moving upward.'],
+'熱水噴出孔':['Hydrothermal vent','Hot water is flowing out.\nWorms live in tubes like these.\nEvery tube is empty.\nNo signs of life.'],
+'漁船の残骸':['Fishing boat wreck','A small fishing boat.\nThe hull is split in the middle.\nIt does not look crushed.\nIt looks as if it was cut apart.'],
+'クジラの骨':['Whale bones','A large whale skeleton.\n7 ribs on one side are damaged.\nThey are crushed at the base.\nThe other side is intact.'],
+'先行機6号':['Probe No. 6','Unmanned probe No. 6.\nContact was lost 6 months ago.\nIts outer shell is deformed.\nThe cause is unknown.'],
+'岩に刺さった歯':['Tooth in the rock','An object shaped like a tooth.\nAbout 15 m long.\nDeeply embedded in the rock.\nIts origin is unknown.'],
+'吐き戻しの塊':['Regurgitated mass','Metal and bone pressed together.\nAbout 12 m across.\nPart of the surface has dissolved.\nIt formed recently.'],
+'？？？':['???','An unknown giant creature.\nIts full length cannot be measured.\nNo further records.'],
+'信号源':['Signal source','The signal source is here.\n5 transmitters from past probes.\nThey belong to probes 1 to 5.\nAll are still working.']};
 const rName=r=>LANG==='ja'?r.name:REC_EN[r.name][0];
 const rLine=r=>LANG==='ja'?r.line.replace(/。(?=.)/g,'。\n'):REC_EN[r.name][1];
 function applyLang(){
@@ -684,7 +684,7 @@ function put(parent,mesh,x,y,z,rx,ry,rz){mesh.position.set(x,y,z);mesh.rotation.
   for(let i=0;i<3;i++){const l=new THREE.Mesh(lg,m);l.scale.set(.75,1.25,1);put(w,l,rr(-4,4),.5,rr(1,5),Math.PI/2+rr(-.3,.3),rr(0,3),0);}   // 落ちた輪
   g.rotation.set(.15,.5,.55);g.position.set(-1,.6,1);w.add(g);
   colAt(w,0,3,1,3.2,3.6);
-  addPOI('観測ブイの錨','係留用の錨。鎖は途中で破断。破断面に引き伸ばされた痕。',w,13,new V3(0,4,1));
+  addPOI('観測ブイの錨','ブイを固定するための錨。鎖は途中で切れている。切れた部分に伸びた跡がある。',w,13,new V3(0,4,1));
 })();
 // 2 漁船：真ん中で噛み切られている
 (function(){
@@ -724,7 +724,7 @@ function put(parent,mesh,x,y,z,rx,ry,rz){mesh.position.set(x,y,z);mesh.rotation.
   // 船体の破片
   for(let i=0;i<7;i++){const p=boxm(rr(.6,1.8),.08,rr(.5,1.4),wood);put(w,p,rr(-3,5),rr(.1,.6),rr(1,7),rr(-.4,.4),rr(0,3),rr(-.4,.4));}
   colAt(w,-4.5,2.6,1,5,3.4);colAt(w,6.5,1.6,3.5,4,2.6);
-  addPOI('漁船の残骸','小型漁船。船体は中央で分断。断面は圧壊ではなく、切断に近い。',w,17,new V3(1,3,3));
+  addPOI('漁船の残骸','小型の漁船。船体が中央で切れている。押しつぶされた跡ではない。切り落とされたように見える。',w,17,new V3(1,3,3));
 })();
 // 3 クジラの骨：片側の肋骨だけが砕けている
 (function(){
@@ -745,7 +745,7 @@ function put(parent,mesh,x,y,z,rx,ry,rz){mesh.position.set(x,y,z);mesh.rotation.
   for(const s of[-1,1]){const jw=new THREE.Mesh(new THREE.TorusGeometry(9,.3,6,18,.95),m);put(g,jw,hp.x+s*9.6,hp.y-3.4,hp.z-1.5,Math.PI/2,0,s>0?Math.PI-.42:-.53);}
   g.rotation.set(.04,1.35,.1);g.position.set(-2,-1.6,2);w.add(g);
   colAt(w,-2,2.5,2,9,3.6,5);
-  addPOI('クジラの骨','大型鯨類の骨格。片側の肋骨7本が基部で破砕。反対側は無傷。',w,17,new V3(-2,3,3));
+  addPOI('クジラの骨','大きなクジラの骨。片側のあばら骨7本に損傷。骨の根元が砕けている。反対側の骨は無傷。',w,17,new V3(-2,3,3));
 })();
 // 4 発光クラゲ
 const jellies=[];
@@ -764,7 +764,7 @@ const jellies=[];
     const s=rr(.6,1.5);j.scale.setScalar(s);j.userData={x:rr(-11,11),z:rr(-9,9),y0:rr(-12,12),ph:rr(0,6),sp:rr(.5,1.1),s};w.add(j);jellies.push(j);
   }
   w.add(new THREE.PointLight(0x40d0ff,70,44,1.6));
-  addPOI('発光クラゲの群れ','発光性クラゲの群体。個体数 約20。全個体が上方へ移動中。',w,18);
+  addPOI('発光クラゲの群れ','光るクラゲの群れ。数は約20匹。すべて上へ移動している。',w,18);
 })();
 // 5 熱水噴出孔：生き物がいない
 const ventSmoke=(function(){
@@ -788,7 +788,7 @@ const ventSmoke=(function(){
   g.setAttribute('position',new THREE.BufferAttribute(p,3));
   const pts=new THREE.Points(g,new THREE.PointsMaterial({map:GLOW,size:3.6,color:0x1c1614,transparent:true,opacity:.75,depthWrite:false}));pts.frustumCulled=false;w.add(pts);
   colAt(w,0,2,0,3.2,6);colAt(w,3.4,1,1.6,2.4,4.4);colAt(w,-3,1.4,-.4,2.5,4.8);
-  addPOI('熱水噴出孔','活動中の熱水噴出孔。周囲の棲管はすべて空。生物の反応なし。',w,16,new V3(0,4,2));
+  addPOI('熱水噴出孔','熱い水が噴き出している。周りには生き物がすむ管がある。中には何もいない。生き物の反応はない。',w,16,new V3(0,4,2));
   return {p,a,N,pts,tops};
 })();
 // 6 岩に刺さった巨大な歯
@@ -804,7 +804,7 @@ const ventSmoke=(function(){
   for(let i=0;i<9;i++){const s=rr(.8,2.6),m=new THREE.Mesh(reef.rockGeo,reef.shelfMat);put(w,m,rr(-4,4),rr(-3,5),rr(-2.5,.5),rr(0,6),rr(0,6),rr(0,6));m.scale.set(s,s*rr(.6,1),s);}
   for(let i=0;i<7;i++){const a=i/7*6.28+rr(-.3,.3),ln=rr(5,11),cr=boxm(.22,ln,.3,DARK);put(w,cr,Math.cos(a)*ln*.5,.5+Math.sin(a)*ln*.5,-2.6,0,0,a-Math.PI/2+rr(-.15,.15));}   // 亀裂
   colAt(w,0,2.2,5,2.6,3.2,7);
-  addPOI('岩に刺さった歯','歯状の構造物。全長 約15m。岩盤に貫入。由来不明。',w,16,new V3(0,2,7));
+  addPOI('岩に刺さった歯','歯のようなもの。長さは約15m。岩に深く刺さっている。何のものかは不明。',w,16,new V3(0,2,7));
 })();
 // 7 先行機6号
 const deadBeacon=(function(){
@@ -814,7 +814,7 @@ const deadBeacon=(function(){
   const b=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,color:0xff2a1a,blending:THREE.AdditiveBlending,depthWrite:false,fog:false}));b.scale.set(3,3,1);b.position.set(.3,2.4,1.2);w.add(b);
   const pl=new THREE.PointLight(0xff2010,0,24,1.6);pl.position.copy(b.position);w.add(pl);
   colAt(w,0,1.3,1,1.6,1.2);
-  addPOI('先行機6号','無人探査機6号。半年前に通信途絶。外殻に変形。原因不明。',w,13,new V3(0,1.5,1));
+  addPOI('先行機6号','無人探査機6号。半年前に通信が途絶えた。機体の外側が変形している。原因は不明。',w,13,new V3(0,1.5,1));
   return {b,pl};
 })();
 // 8 吐き戻しの塊：ここまでに見つけた物と同じ材料が、ひとつに押し固められている
@@ -848,7 +848,7 @@ const deadBeacon=(function(){
   // 岩棚に落ちた欠片
   for(let i=0;i<6;i++){const q=i%3==0?boxm(rr(.5,.9),rr(.3,.5),rr(.5,.9),orange):i%3==1?new THREE.Mesh(new THREE.TorusGeometry(rr(.9,1.6),.15,6,10,rr(.8,1.4)),bone):boxm(rr(.8,1.6),.08,rr(.5,1),rust);put(w,q,rr(-7,7),.35,rr(-1,6),Math.PI/2+rr(-.3,.3),rr(0,3),rr(-.3,.3));}
   colAt(w,0,4.6,.5,6.2,5.2);
-  addPOI('吐き戻しの塊','金属と骨の圧縮塊。直径 約12m。表面に溶解の痕。形成は最近。',w,17,new V3(0,4.6,.5));
+  addPOI('吐き戻しの塊','金属と骨が押し固められた塊。直径は約12m。表面の一部が溶けている。できてから間もない。',w,17,new V3(0,4.6,.5));
 })();
 // 00 信号源（数に数えない隠し記録）：縦穴の真下から横に離れた暗闇に、先行機1〜5号が絡まって浮いている
 const SIG=(function(){
@@ -862,7 +862,7 @@ const SIG=(function(){
   for(let i=0;i<7;i++){const a=at[i%5],b=at[(i*2+1)%5];tube([a,[(a[0]+b[0])/2+rr(-2.5,2.5),(a[1]+b[1])/2+rr(-3,1),(a[2]+b[2])/2+rr(-2.5,2.5)],b,[b[0]+rr(-2,2),b[1]+rr(-2,2),b[2]+rr(-2,2)]]);}
   for(let i=0;i<5;i++){const a=at[i],up=i%2?1:-1;tube([a,[a[0]+rr(-1,1),a[1]+up*6,a[2]+rr(-1,1)],[a[0]+rr(-3,3),a[1]+up*16,a[2]+rr(-3,3)],[a[0]+rr(-5,5),a[1]+up*30,a[2]+rr(-5,5)]]);}
   addCol(w.position.x,w.position.y,w.position.z,5.2,4.6);
-  const p=addPOI('信号源','信号源を確認。無人探査機の発信機 5基。1号から5号。すべて作動中。',w,10);p.hidden=true;p.el.className='mk sig';POIS.pop();
+  const p=addPOI('信号源','信号の発信元を確認。無人探査機の発信機が5基ある。1号から5号のもの。すべて動いている。',w,10);p.hidden=true;p.el.className='mk sig';POIS.pop();
   w.visible=false;
   return {w,p,lights};
 })();
@@ -877,7 +877,7 @@ const SAVED=(function(){try{
   const old=JSON.parse(store.get('abyss_recs')||'{}')||{},o={};for(const k in old)o[k==='9'?'0':k==='0'?'9':k]=old[k];
   if(Object.keys(o).length)store.set('abyss_recs2',JSON.stringify(o));return o;}catch(_){return {};}})();
 function saveRec(r){SAVED[r.no]=r.depth;store.set('abyss_recs2',JSON.stringify(SAVED));}
-const LAST={no:0,name:'？？？',line:'未知の大型生物。全長 計測不能。以後の記録なし。',found:false,depth:0};
+const LAST={no:0,name:'？？？',line:'正体不明の巨大な生き物。全長は測定できない。この先の記録はない。',found:false,depth:0};
 const pad2=n=>String(n).padStart(2,'0');
 let cardT=0;
 function showCard(r){
