@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>feathecrea — 楽しいを、形にしていく。</title>
+<title>feathecrea — イメージを、形にしていく。</title>
 <link rel="canonical" href="https://feathecrea.com/">
 <meta property="og:site_name" content="feathecrea">
-<meta property="og:title" content="feathecrea — 楽しいを、形にしていく。">
+<meta property="og:title" content="feathecrea — イメージを、形にしていく。">
 <meta property="og:description" content="ゲームとアプリを企画から絵・音・実装まで一貫して手がける制作スタジオ。Games and apps by feathecrea.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://feathecrea.com/">
-<meta property="og:image" content="https://feathecrea.com/images/feathecrea-og.jpg">
+<meta property="og:image" content="https://feathecrea.com/images/feathecrea-og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="feathecrea — Making fun take shape. MELD CHAIN, PULSE WRECKER, Five Minds, One Topic.">
+<meta property="og:image:alt" content="feathecrea — Bringing ideas to life. MELD CHAIN, PULSE WRECKER, Five Minds, One Topic.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://feathecrea.com/images/feathecrea-og.jpg">
+<meta name="twitter:image" content="https://feathecrea.com/images/feathecrea-og.jpg?v=2">
 <meta name="description" content="feathecrea（フェザクリエ）は、ゲームとアプリを企画から絵・音・実装まで一貫して手がける制作スタジオです。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -381,6 +381,10 @@ html[lang="en"] .brand-jp{display:none}
 .lane{height:4px}
 #works{padding-top:36px}
 .item{scroll-margin-top:20px}
+.game-preview{display:block;max-width:640px;margin-top:20px;text-decoration:none}
+.game-preview img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:3px}
+.game-preview:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+.item .play-note{font-size:13px;color:var(--ink-soft);margin-top:14px}
 .product-summary{font-weight:500}
 .item .price-note{font-size:13px;color:var(--ink-soft);margin-top:12px}
 .product-details{margin-top:22px;font-size:14px}
@@ -427,7 +431,7 @@ html[lang="en"] .brand-jp{display:none}
 
 <section class="hero">
   <div class="wrap">
-    <h1 data-en="Making fun&lt;br&gt;&lt;span class=&quot;q&quot;&gt;take shape.&lt;/span&gt;">楽しいを、<br><span class="q">形にしていく。</span></h1>
+    <h1 data-en="Bringing ideas&lt;br&gt;&lt;span class=&quot;q&quot;&gt;to life.&lt;/span&gt;">イメージを、<br><span class="q">形にしていく。</span></h1>
     <p data-en="feathecrea is a game and app studio. From planning to art, sound and code, everything is handled in-house.">feathecrea はゲームとアプリの制作スタジオです。企画から絵・音・実装まで、一貫して手がけています。</p>
     <a class="hero-cta" href="#works" data-en="Explore the games &amp; apps ↓">ゲームとアプリを見る ↓</a>
     <nav class="work-preview" aria-label="配信中の作品" data-en-aria-label="Available games and apps">
@@ -573,6 +577,25 @@ html[lang="en"] .brand-jp{display:none}
         </p>
         <div class="meta"><span>Flutter</span><span data-en="Backend">バックエンド</span><span data-en="JP / EN">日英対応</span></div>
         </details>
+      </div>
+    </div>
+
+    <div class="item i5 rv" id="deepsea">
+      <div class="tag">
+        <span data-en="Browser game / Deep-sea exploration">ブラウザゲーム ／ 深海探索</span>
+        <span class="chip c-live" data-en="Out now">公開中</span>
+      </div>
+      <div>
+        <h3 data-en="DEEP SEA SURVEY">深海探査</h3>
+        <div class="sub" data-en="Play on mobile or PC — Japanese / English">スマホ・PC対応 ／ 日本語・English</div>
+        <a class="game-preview" href="games/deepsea/" aria-label="深海探査をブラウザで遊ぶ" data-en-aria-label="Play DEEP SEA SURVEY in your browser">
+          <img src="games/deepsea/ogp.png" width="1200" height="630" alt="深海探査 — 海底へ降りていく無人探査機" data-en-alt="DEEP SEA SURVEY — an unmanned probe descending into the deep sea" loading="lazy">
+        </a>
+        <p class="product-summary" data-en="Pilot an unmanned probe down a shaft in the seabed.&lt;br&gt;A short deep-sea exploration game.">無人探査機で、海底の縦穴を降りていく。<br>短い深海探査ゲーム。</p>
+        <p class="play-note" data-en="Caution: may be distressing if you fear the sea or deep water.">※海・深海が苦手な人は注意してください。</p>
+        <div class="store-links" aria-label="深海探査を遊ぶ" data-en-aria-label="Play DEEP SEA SURVEY">
+          <a href="games/deepsea/" data-en="Play in your browser →">ブラウザで遊ぶ →</a>
+        </div>
       </div>
     </div>
 
@@ -737,7 +760,7 @@ html[lang="en"] .brand-jp{display:none}
 <script>
 /* language switch: ?lang= → saved choice → browser language */
 (function(){
-  var T={ja:document.title,en:'feathecrea — Making fun take shape.'};
+  var T={ja:document.title,en:'feathecrea — Bringing ideas to life.'};
   var md=document.querySelector('meta[name="description"]');
   var D={ja:md?md.content:'',en:'feathecrea is a game and app studio that handles everything in-house, from planning to art, sound and code.'};
   function pick(){ return FeathecreaLanguage.get(); }
