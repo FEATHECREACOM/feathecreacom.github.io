@@ -373,9 +373,12 @@ html[lang="en"] .brand-jp{display:none}
 .hero{padding:48px 0 36px}
 .hero p{margin-top:20px;max-width:38em}
 .hero-cta{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;color:var(--deep);text-underline-offset:5px;font-size:14px}
-.work-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:560px;gap:12px;margin-top:22px}
+.work-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:760px;gap:12px;margin-top:22px}
 .work-preview a{display:flex;align-items:center;gap:10px;padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;text-decoration:none;white-space:normal;letter-spacing:0;font-size:12px;line-height:1.5}
 .work-preview a:hover,.work-preview a:focus-visible{border-color:var(--deep);background:#fff}
+.preview-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.preview-name{display:block}
+.preview-type{display:inline-block;max-width:100%;padding:1px 5px;border:1px solid var(--rule);border-radius:3px;font-size:10px;line-height:1.5;letter-spacing:0;color:var(--ink-soft)}
 .work-preview img{flex:none;width:44px;height:44px;border-radius:10px}
 .lanes{margin-top:28px;gap:4px;max-width:560px}
 .lane{height:4px}
@@ -394,7 +397,7 @@ html[lang="en"] .brand-jp{display:none}
   .hero{padding:30px 0 24px}
   .hero p{margin-top:16px}
   .hero-cta{margin-top:10px}
-  .work-preview{gap:8px;margin-top:14px}
+  .work-preview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
   .work-preview a{flex-direction:column;align-items:flex-start;padding:10px 8px;font-size:11px}
   .work-preview img{width:40px;height:40px}
   .lanes{margin-top:20px}
@@ -434,10 +437,11 @@ html[lang="en"] .brand-jp{display:none}
     <h1 data-en="Bringing ideas&lt;br&gt;&lt;span class=&quot;q&quot;&gt;to life.&lt;/span&gt;">イメージを、<br><span class="q">形にしていく。</span></h1>
     <p data-en="feathecrea is a game and app studio. From planning to art, sound and code, everything is handled in-house.">feathecrea はゲームとアプリの制作スタジオです。企画から絵・音・実装まで、一貫して手がけています。</p>
     <a class="hero-cta" href="#works" data-en="Explore the games &amp; apps ↓">ゲームとアプリを見る ↓</a>
-    <nav class="work-preview" aria-label="配信中の作品" data-en-aria-label="Available games and apps">
-      <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span>MELD CHAIN</span></a>
-      <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span>PULSE WRECKER</span></a>
-      <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span data-en="Five Minds, One Topic">5人のなんでも会議</span></a>
+    <nav class="work-preview" aria-label="配信・公開中の作品" data-en-aria-label="Available games and apps">
+      <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">MELD CHAIN</span><span class="preview-type" data-en="App">アプリ</span></span></a>
+      <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">PULSE WRECKER</span><span class="preview-type" data-en="App">アプリ</span></span></a>
+      <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="Five Minds, One Topic">5人のなんでも会議</span><span class="preview-type" data-en="App">アプリ</span></span></a>
+      <a href="#deepsea"><img src="images/icon-deepsea.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="DEEP SEA SURVEY">深海探査</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span></span></a>
     </nav>
     <div class="lanes" aria-hidden="true">
       <div class="lane"></div>
@@ -586,7 +590,7 @@ html[lang="en"] .brand-jp{display:none}
         <span class="chip c-live" data-en="Out now">公開中</span>
       </div>
       <div>
-        <h3 data-en="DEEP SEA SURVEY">深海探査</h3>
+        <h3><img class="app-icon" src="images/icon-deepsea.png" alt="" width="40" height="40"><span data-en="DEEP SEA SURVEY">深海探査</span></h3>
         <div class="sub" data-en="Play on mobile or PC — Japanese / English">スマホ・PC対応 ／ 日本語・English</div>
         <a class="game-preview" href="games/deepsea/" aria-label="深海探査をブラウザで遊ぶ" data-en-aria-label="Play DEEP SEA SURVEY in your browser">
           <img src="games/deepsea/ogp.png" width="1200" height="630" alt="深海探査 — 海底へ降りていく無人探査機" data-en-alt="DEEP SEA SURVEY — an unmanned probe descending into the deep sea" loading="lazy">
