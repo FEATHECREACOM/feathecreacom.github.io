@@ -372,6 +372,7 @@ html[lang="en"] .brand-jp{display:none}
 /* Easier discovery while preserving the original typography and palette. */
 .hero{padding:48px 0 36px}
 .hero p{margin-top:20px;max-width:38em}
+.hero-intro > span{display:block}
 .hero-cta{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;color:var(--deep);text-underline-offset:5px;font-size:14px}
 .work-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:912px;gap:12px;margin-top:22px}
 .work-preview a{display:flex;align-items:center;gap:10px;padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;text-decoration:none;white-space:normal;letter-spacing:0;font-size:12px;line-height:1.5}
@@ -438,7 +439,11 @@ html[lang="en"] .brand-jp{display:none}
 <section class="hero">
   <div class="wrap">
     <h1 data-en="Bringing ideas&lt;br&gt;&lt;span class=&quot;q&quot;&gt;to life.&lt;/span&gt;">イメージを、<br><span class="q">形にしていく。</span></h1>
-    <p data-en="feathecrea is a game and app studio. From planning to art, sound and code, everything is handled in-house.">feathecrea はゲームとアプリの制作スタジオです。企画から絵・音・実装まで、一貫して手がけています。</p>
+    <p class="hero-intro">
+      <span data-en="A studio making games and apps.">ゲームとアプリの制作スタジオです。</span>
+      <span data-en="Planning and coding are in-house.">企画から実装まで手がけます。</span>
+      <span data-en="Art and sound are made in-house.">絵や音も制作しています。</span>
+    </p>
     <a class="hero-cta" href="#works" data-en="Explore the games &amp; apps ↓">ゲームとアプリを見る ↓</a>
     <nav class="work-preview" aria-label="配信・公開中の作品" data-en-aria-label="Available games and apps">
       <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">MELD CHAIN</span><span class="preview-type" data-en="App">アプリ</span></span></a>
