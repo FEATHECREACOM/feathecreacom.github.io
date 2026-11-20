@@ -17,10 +17,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://feathecrea.com/images/feathecrea-og-pixel.jpg">
 <meta name="description" content="feathecrea（フェザクリエ）は、ゲームとアプリを企画から絵・音・実装まで一貫して手がける制作スタジオです。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+@font-face{
+  font-family:"DotGothic16";
+  src:url("assets/fonts/DotGothic16-Regular.ttf") format("truetype");
+  font-weight:400;
+  font-display:swap;
+}
 :root{
   --ink:#f5ead7;
   --ink-soft:#c3b4a2;
@@ -45,7 +48,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--paper);
   color:var(--ink);
-  font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  font-family:"DotGothic16","Hiragino Sans","Yu Gothic",sans-serif;
   font-size:16px;
   line-height:1.9;
   -webkit-font-smoothing:antialiased;
@@ -59,7 +62,7 @@ a{color:inherit}
 header{padding:28px 0 0}
 .brandbar{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .brand{
-  font-family:"Zen Old Mincho",serif;
+  font-family:inherit;
   font-size:26px;
   font-weight:700;
   letter-spacing:.14em;
@@ -69,7 +72,7 @@ header{padding:28px 0 0}
   letter-spacing:.3em;
   color:var(--ink-soft);
   margin-left:12px;
-  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-family:inherit;
   font-weight:400;
 }
 nav{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13px;letter-spacing:.08em}
@@ -80,7 +83,7 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--amber
 /* ---------- hero ---------- */
 .hero{padding:88px 0 72px}
 .hero h1{
-  font-family:"Zen Old Mincho",serif;
+  font-family:inherit;
   font-weight:900;
   font-size:clamp(38px,7.5vw,74px);
   line-height:1.28;
@@ -98,7 +101,7 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--amber
 .sec{padding:76px 0}
 .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:8px}
 .sec-head h2{
-  font-family:"Zen Old Mincho",serif;
+  font-family:inherit;
   font-size:22px;
   font-weight:700;
   letter-spacing:.16em;
@@ -144,7 +147,7 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--amber
 .c-soon{color:var(--ink-soft)}
 
 .item h3{
-  font-family:"Zen Old Mincho",serif;
+  font-family:inherit;
   font-size:23px;
   font-weight:700;
   letter-spacing:.04em;
@@ -335,12 +338,12 @@ footer{padding:44px 0 60px;font-size:12px;color:var(--ink-soft);letter-spacing:.
 
 /* ---------- coming soon ---------- */
 .soon-head{display:flex;align-items:baseline;gap:14px;margin-top:56px}
-.soon-head h3{font-family:"Zen Old Mincho",serif;font-size:18px;font-weight:700;letter-spacing:.14em}
+.soon-head h3{font-family:inherit;font-size:18px;font-weight:700;letter-spacing:.14em}
 .soon-head .en{font-size:11px;letter-spacing:.26em;color:var(--ink-soft);text-transform:uppercase}
 .teasers{display:flex;flex-wrap:wrap;gap:24px;margin-top:20px}
 .teaser{margin:0;width:200px;max-width:calc(50% - 12px)}
 .teaser video{display:block;width:100%;aspect-ratio:360/778;object-fit:cover;background:var(--ink);border:1px solid var(--rule);border-radius:6px}
-.teaser figcaption{margin-top:10px;font-family:"Zen Old Mincho",serif;font-size:15px;font-weight:700;letter-spacing:.06em}
+.teaser figcaption{margin-top:10px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.06em}
 
 /* ---------- language switch ---------- */
 .topright{display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap}
@@ -361,7 +364,7 @@ html[lang="en"] .brand-jp{display:none}
 .work-preview a:hover,.work-preview a:focus-visible{border-color:var(--deep);background:#30252b}
 .preview-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
 .preview-name{display:block}
-.preview-type{display:inline-block;max-width:100%;padding:1px 5px;border:1px solid var(--rule);border-radius:3px;font-size:10px;line-height:1.5;letter-spacing:0;color:var(--ink-soft)}
+.preview-type{display:inline-block;max-width:100%;padding:1px 5px;border:1px solid var(--rule);border-radius:3px;font-size:13px;line-height:1.5;letter-spacing:0;color:var(--ink-soft)}
 .work-preview img{flex:none;width:44px;height:44px;border-radius:10px}
 #works{padding-top:36px}
 .item{scroll-margin-top:20px}
@@ -465,6 +468,10 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
   .hero-grid{grid-template-columns:1fr;gap:24px}
   .hero-art{max-width:520px}
   .work-preview{margin-top:20px}
+}
+@media(max-width:400px){
+  .work-preview{grid-template-columns:1fr}
+  .work-preview a{flex-direction:row;align-items:center;font-size:15px}
 }
 </style>
 <script src="assets/site-language.js"></script>
