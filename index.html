@@ -438,11 +438,14 @@ header{
   background:#6d5044;
   clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px);
 }
-.hero-window{container-type:inline-size;perspective:1500px;background:#130f18;overflow:hidden}
+.cube-controls:not([hidden]){display:flex;justify-content:center;gap:8px;padding-top:6px}
+.cube-controls button{min-width:48px;min-height:44px;border:1px solid var(--rule);background:#211b20;color:var(--amber);font:inherit;cursor:pointer}
+.cube-controls button:focus-visible{outline:2px solid var(--amber)}
+.hero-window{touch-action:pan-y pinch-zoom;user-select:none;container-type:inline-size;perspective:1500px;background:#130f18;overflow:hidden}
 .hero-cube{position:relative;aspect-ratio:10/7;transform-style:preserve-3d}
 .hero-cube a{position:absolute;inset:0;backface-visibility:hidden;}
 .hero-cube.turning .front{transform:translateZ(50cqw)}
-.hero-cube.turning .side{transform:rotateY(90deg) translateZ(50cqw)}
+.hero-cube.turning .side{transform:rotateY(var(--side-angle,90deg)) translateZ(50cqw)}
 .hero-cube img.sea-cover{height:100%;object-fit:contain;background:#091a29}
 .hero-art a{display:block;background:#120d0c}
 .hero-art a[hidden]{display:none}
@@ -539,6 +542,10 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
               <span class="hero-art-label">Nameless Depths →</span>
             </a>
           </div>
+        </div>
+        <div class="cube-controls" hidden>
+          <button type="button" data-step="-1" aria-label="前の作品" data-en-aria-label="Previous game">◀</button>
+          <button type="button" data-step="1" aria-label="次の作品" data-en-aria-label="Next game">▶</button>
         </div>
       </figure>
     </div>
@@ -851,19 +858,24 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
   let timer;
   const cube = frame.querySelector('.hero-cube');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  async function turn(){
+  let gesture;
+  let suppressClick = false;
+  async function turn(step = 1){
+    if (cube.classList.contains('turning')) return;
+    clearTimeout(timer);
     const front = slides[active];
-    active = (active + 1) % slides.length;
+    active = (active + step + slides.length) % slides.length;
     const side = slides[active];
     side.hidden = false;
     side.tabIndex = -1;
     if (!reduced.matches && cube.animate && CSS.supports('width','1cqw')) {
+      cube.style.setProperty('--side-angle', (90 * step) + 'deg');
       front.classList.add('front');
       side.classList.add('side');
       cube.classList.add('turning');
       const rotation = cube.animate([
         {transform:'translateZ(-50cqw) rotateY(0deg)'},
-        {transform:'translateZ(-50cqw) rotateY(-90deg)'}
+        {transform:'translateZ(-50cqw) rotateY('+(-90 * step)+'deg)'}
       ], {duration:760, easing:'ease-in-out'});
       await rotation.finished;
       cube.classList.remove('turning');
@@ -877,10 +889,39 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
   function schedule(){
     clearTimeout(timer);
     if (cube.classList.contains('turning')) return;
-    if (document.hidden || frame.matches(':focus-within') ||
+    if (gesture || document.hidden || frame.matches(':focus-within') ||
         (matchMedia('(hover: hover)').matches && frame.matches(':hover'))) return;
     timer = setTimeout(turn, 7000);
   }
+  const controls = frame.querySelector('.cube-controls');
+  controls.hidden = false;
+  controls.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', () => turn(Number(button.dataset.step)));
+  });
+  cube.addEventListener('dragstart', event => event.preventDefault());
+  cube.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0) return;
+    suppressClick = false;
+    gesture = {id:event.pointerId, x:event.clientX, y:event.clientY};
+    clearTimeout(timer);
+  });
+  function finishGesture(event){
+    if (!gesture || event.pointerId !== gesture.id) return;
+    const dx = event.clientX - gesture.x;
+    const dy = event.clientY - gesture.y;
+    gesture = null;
+    if (event.type === 'pointerup' && Math.abs(dx) >= 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      suppressClick = true;
+      turn(dx < 0 ? 1 : -1);
+    }
+    schedule();
+  }
+  window.addEventListener('pointerup', finishGesture);
+  window.addEventListener('pointercancel', finishGesture);
+  cube.addEventListener('click', event => {
+    if (suppressClick && event.detail) event.preventDefault();
+    suppressClick = false;
+  }, true);
   frame.addEventListener('pointerenter', schedule);
   frame.addEventListener('pointerleave', schedule);
   frame.addEventListener('focusin', schedule);
