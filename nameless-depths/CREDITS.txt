@@ -1,0 +1,7 @@
+Nameless Depths (demo)  © 2026 feathecrea  All rights reserved. Do not redistribute.
+
+Credits / 使っているもの
+- three.js (MIT License) https://threejs.org/  ※ゲームは cdnjs から読み込む
+- Fonts / フォント: DotGothic16, Silkscreen (SIL Open Font License 1.1)  ※Google Fonts から読み込む
+- Some sound effects and music were made with Stable Audio (Stability AI).
+  一部の効果音と曲は Stable Audio（Stability AI）で作成しました。
