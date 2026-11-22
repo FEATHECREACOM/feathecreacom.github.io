@@ -19,7 +19,9 @@
       const req = store.get('browser');
       let record;
       req.onsuccess = () => {
-        record = edit(req.result);
+        const previous = req.result;
+        if (previous) delete previous.nickname;
+        record = edit(previous);
         if (record) store.put(record, 'browser');
       };
       tx.oncomplete = () => resolve(record);
@@ -30,9 +32,9 @@
   async function sync(record) {
     if (!record || record.sent >= record.revision) return;
     try {
-      const { id, named, nickname, revision } = record;
+      const { id, named, revision } = record;
       const result = await fetch(endpoint, {method:'POST', credentials:'omit', referrerPolicy:'no-referrer',
-        headers:{'Content-Type':'application/json'}, body:JSON.stringify({id, named, nickname, revision})});
+        headers:{'Content-Type':'application/json'}, body:JSON.stringify({id, named, revision})});
       if (!result.ok) throw Error('Pending');
       await update(current => current?.id === id ? {...current, sent:Math.max(current.sent,revision)} : null);
     } catch {
@@ -41,38 +43,22 @@
     }
   }
   function retry() { update(record => record).then(sync).catch(() => {}); }
-  function record(name, share) {
+  function record(named = false) {
     update(previous => {
-      const r = previous || {id:crypto.randomUUID(), named:false, nickname:null, revision:1, sent:0};
-      if (name !== undefined) {
-        const nickname = share && name ? name : null;
-        if (nickname !== r.nickname || (name && !r.named)) {
-          r.named ||= Boolean(name);
-          r.nickname = nickname;
-          r.revision++;
-        }
+      const current = previous || {id:crypto.randomUUID(), named:false, revision:1, sent:0};
+      if (named && !current.named) {
+        current.named = true;
+        current.revision++;
       }
-      return r;
+      return current;
     }).then(sync).catch(() => {});
   }
   window.playtestStats = {
     start:() => record(),
-    name:(name, share) => record(name, share),
-    restore:async input => {
-      try {
-        const r = await update(record => record);
-        if (input.isConnected && !input.dataset.touched && r?.nickname && input.closest('.sname')?.querySelector('input[type=text]')?.value === r.nickname) input.checked = true;
-      } catch {}
-    }
+    nameSet:() => record(true),
+    // Compatibility with already cached game pages.
+    name:value => { if (value) record(true); }
   };
-  document.addEventListener('change', e => { if(e.target.id==='shareWithDev') e.target.dataset.touched='1'; });
-  const base = document.getElementById('base');
-  let lastInput;
-  new MutationObserver(() => {
-    const input = base.querySelector('#shareWithDev');
-    if (input && input !== lastInput) window.playtestStats.restore(input);
-    lastInput = input;
-  }).observe(base, {subtree:true, childList:true});
   addEventListener('online',retry);
   retry();
 })();
