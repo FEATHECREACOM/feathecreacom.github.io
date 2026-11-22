@@ -364,6 +364,7 @@ html[lang="en"] .brand-jp{display:none}
 .work-preview a:hover,.work-preview a:focus-visible{border-color:var(--deep);background:#30252b}
 .preview-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
 .preview-name{display:block}
+.preview-release{color:var(--amber);white-space:nowrap}
 .preview-type{display:inline-block;max-width:100%;padding:1px 5px;border:1px solid var(--rule);border-radius:3px;font-size:13px;line-height:1.5;letter-spacing:0;color:var(--ink-soft)}
 .work-preview img{flex:none;width:44px;height:44px;border-radius:10px}
 #works{padding-top:36px}
@@ -438,8 +439,9 @@ header{
   clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px);
 }
 .hero-art a{position:relative;display:block;background:#120d0c}
+.hero-art a[hidden]{display:none}
 .hero-art a:focus-visible{outline:3px solid var(--amber);outline-offset:-3px}
-.hero-art img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.hero-art img{display:block;width:100%;aspect-ratio:10/7;height:auto;object-fit:cover;image-rendering:pixelated}
 .hero-art-label{
   position:absolute;
   right:8px;
@@ -519,6 +521,11 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
             alt="ランタンで壁画を照らす灯守" data-en-alt="The Wickkeeper lights a cave painting with a lantern">
           <span class="hero-art-label" data-en="Gloamwell →">洞窟探索 →</span>
         </a>
+        <a href="#nameless-depths" hidden aria-label="Nameless Depthsの紹介を見る" data-en-aria-label="Explore Nameless Depths">
+          <img src="images/nameless-depths-home.webp" width="700" height="490"
+            alt="紫の炎がともる石畳の広場に立つ主人公" data-en-alt="The player stands in a stone plaza lit by a purple flame">
+          <span class="hero-art-label">Nameless Depths →</span>
+        </a>
       </figure>
     </div>
     <nav class="work-preview" aria-label="配信・公開中の作品" data-en-aria-label="Available games and apps">
@@ -526,6 +533,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
       <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">PULSE WRECKER</span><span class="preview-type" data-en="App">アプリ</span></span></a>
       <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="Five Minds, One Topic">5人のなんでも会議</span><span class="preview-type" data-en="App">アプリ</span></span></a>
       <a href="#deepsea"><img src="images/icon-deepsea.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="DEEP SEA SURVEY">深海探査</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span></span></a>
+      <a href="#nameless-depths"><img src="images/icon-nameless-depths.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" lang="en">Nameless Depths</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span><span class="preview-release" data-en="Demo available">体験版リリース</span></span></a>
     </nav>
 
   </div>
@@ -819,6 +827,31 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
     });
   }, { threshold: 0.12 });
   items.forEach(function(el){ io.observe(el); });
+})();
+
+/* Rotate the featured game, keeping its image and destination together. */
+(function(){
+  const frame = document.querySelector('.hero-art');
+  const slides = frame.querySelectorAll('a');
+  let active = 0;
+  let timer;
+  function schedule(){
+    clearTimeout(timer);
+    if (document.hidden || frame.matches(':focus-within') ||
+        (matchMedia('(hover: hover)').matches && frame.matches(':hover'))) return;
+    timer = setTimeout(function(){
+      slides[active].hidden = true;
+      active = (active + 1) % slides.length;
+      slides[active].hidden = false;
+      schedule();
+    }, 7000);
+  }
+  frame.addEventListener('pointerenter', schedule);
+  frame.addEventListener('pointerleave', schedule);
+  frame.addEventListener('focusin', schedule);
+  frame.addEventListener('focusout', function(){ setTimeout(schedule, 0); });
+  document.addEventListener('visibilitychange', schedule);
+  schedule();
 })();
 
 /* lightbox */
