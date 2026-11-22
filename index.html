@@ -359,7 +359,7 @@ html[lang="en"] .brand-jp{display:none}
 .hero p{margin-top:20px;max-width:38em}
 .hero-intro > span{display:block}
 .hero-cta{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;color:var(--deep);text-underline-offset:5px;font-size:14px}
-.work-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:912px;gap:12px;margin-top:22px}
+.work-preview{display:grid;grid-auto-rows:1fr;grid-template-columns:repeat(4,minmax(0,1fr));max-width:912px;gap:12px;margin-top:22px}
 .work-preview a{display:flex;align-items:center;gap:10px;padding:12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:6px;text-decoration:none;white-space:normal;letter-spacing:0;font-size:12px;line-height:1.5}
 .work-preview a:hover,.work-preview a:focus-visible{border-color:var(--deep);background:#30252b}
 .preview-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
@@ -438,7 +438,13 @@ header{
   background:#6d5044;
   clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px);
 }
-.hero-art a{position:relative;display:block;background:#120d0c}
+.hero-window{container-type:inline-size;perspective:1500px;background:#130f18;overflow:hidden}
+.hero-cube{position:relative;aspect-ratio:10/7;transform-style:preserve-3d}
+.hero-cube a{position:absolute;inset:0;backface-visibility:hidden;}
+.hero-cube.turning .front{transform:translateZ(50cqw)}
+.hero-cube.turning .side{transform:rotateY(90deg) translateZ(50cqw)}
+.hero-cube img.sea-cover{height:100%;object-fit:contain;background:#091a29}
+.hero-art a{display:block;background:#120d0c}
 .hero-art a[hidden]{display:none}
 .hero-art a:focus-visible{outline:3px solid var(--amber);outline-offset:-3px}
 .hero-art img{display:block;width:100%;aspect-ratio:10/7;height:auto;object-fit:cover;image-rendering:pixelated}
@@ -516,23 +522,31 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
         <a class="hero-cta" href="#works" data-en="Explore the games &amp; apps ↓">ゲームとアプリを見る ↓</a>
       </div>
       <figure class="hero-art">
-        <a href="#gloamwell" aria-label="洞窟探索の紹介を見る" data-en-aria-label="Explore Gloamwell">
-          <img src="games/gloamwell/preview.jpg" width="700" height="490" fetchpriority="high"
-            alt="ランタンで壁画を照らす灯守" data-en-alt="The Wickkeeper lights a cave painting with a lantern">
-          <span class="hero-art-label" data-en="Gloamwell →">洞窟探索 →</span>
-        </a>
-        <a href="#nameless-depths" hidden aria-label="Nameless Depthsの紹介を見る" data-en-aria-label="Explore Nameless Depths">
-          <img src="images/nameless-depths-home.webp" width="700" height="490"
-            alt="紫の炎がともる石畳の広場に立つ主人公" data-en-alt="The player stands in a stone plaza lit by a purple flame">
-          <span class="hero-art-label">Nameless Depths →</span>
-        </a>
+        <div class="hero-window">
+          <div class="hero-cube">
+            <a href="games/gloamwell/" aria-label="洞窟探索を遊ぶ" data-en-aria-label="Play Gloamwell">
+              <img src="games/gloamwell/preview.jpg" width="700" height="490" fetchpriority="high"
+                alt="ランタンで壁画を照らす灯守" data-en-alt="The Wickkeeper lights a cave painting with a lantern">
+              <span class="hero-art-label" data-en="Gloamwell →">洞窟探索 →</span>
+            </a>
+            <a href="games/deepsea/" hidden aria-label="深海探査を遊ぶ" data-en-aria-label="Play Deep Sea Survey">
+              <img class="sea-cover" src="games/deepsea/ogp.png" width="1200" height="630" alt="">
+              <span class="hero-art-label" data-en="Deep Sea Survey →">深海探査 →</span>
+            </a>
+            <a href="nameless-depths/" hidden aria-label="Nameless Depthsの体験版を遊ぶ" data-en-aria-label="Play the Nameless Depths demo">
+              <img src="images/nameless-depths-home.webp" width="700" height="490"
+                alt="紫の炎がともる石畳の広場に立つ主人公" data-en-alt="The player stands in a stone plaza lit by a purple flame">
+              <span class="hero-art-label">Nameless Depths →</span>
+            </a>
+          </div>
+        </div>
       </figure>
     </div>
     <nav class="work-preview" aria-label="配信・公開中の作品" data-en-aria-label="Available games and apps">
-      <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">MELD CHAIN</span><span class="preview-type" data-en="App">アプリ</span></span></a>
-      <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">PULSE WRECKER</span><span class="preview-type" data-en="App">アプリ</span></span></a>
-      <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="Five Minds, One Topic">5人のなんでも会議</span><span class="preview-type" data-en="App">アプリ</span></span></a>
-      <a href="#deepsea"><img src="images/icon-deepsea.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="DEEP SEA SURVEY">深海探査</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span></span></a>
+      <a href="#meldchain"><img src="images/icon-meldchain.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">MELD CHAIN</span><span class="preview-type" data-en="App">アプリ</span><span class="preview-release" data-en="Available now">リリース中</span></span></a>
+      <a href="#pulsewrecker"><img src="images/icon-pulsewrecker.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name">PULSE WRECKER</span><span class="preview-type" data-en="App">アプリ</span><span class="preview-release" data-en="Available now">リリース中</span></span></a>
+      <a href="#goninkaigi"><img src="images/icon-goninkaigi.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="Five Minds, One Topic">5人のなんでも会議</span><span class="preview-type" data-en="App">アプリ</span><span class="preview-release" data-en="Available now">リリース中</span></span></a>
+      <a href="#deepsea"><img src="images/icon-deepsea.png" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" data-en="DEEP SEA SURVEY">深海探査</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span><span class="preview-release" data-en="Available now">リリース中</span></span></a>
       <a href="#nameless-depths"><img src="images/icon-nameless-depths.png?v=sword-shield" alt="" width="56" height="56"><span class="preview-copy"><span class="preview-name" lang="en">Nameless Depths</span><span class="preview-type" data-en="Browser game">ブラウザゲーム</span><span class="preview-release" data-en="Demo available">体験版リリース</span></span></a>
     </nav>
 
@@ -835,16 +849,37 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
   const slides = frame.querySelectorAll('a');
   let active = 0;
   let timer;
+  const cube = frame.querySelector('.hero-cube');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  async function turn(){
+    const front = slides[active];
+    active = (active + 1) % slides.length;
+    const side = slides[active];
+    side.hidden = false;
+    side.tabIndex = -1;
+    if (!reduced.matches && cube.animate && CSS.supports('width','1cqw')) {
+      front.classList.add('front');
+      side.classList.add('side');
+      cube.classList.add('turning');
+      const rotation = cube.animate([
+        {transform:'translateZ(-50cqw) rotateY(0deg)'},
+        {transform:'translateZ(-50cqw) rotateY(-90deg)'}
+      ], {duration:760, easing:'ease-in-out'});
+      await rotation.finished;
+      cube.classList.remove('turning');
+      front.classList.remove('front');
+      side.classList.remove('side');
+    }
+    front.hidden = true;
+    side.removeAttribute('tabindex');
+    schedule();
+  }
   function schedule(){
     clearTimeout(timer);
+    if (cube.classList.contains('turning')) return;
     if (document.hidden || frame.matches(':focus-within') ||
         (matchMedia('(hover: hover)').matches && frame.matches(':hover'))) return;
-    timer = setTimeout(function(){
-      slides[active].hidden = true;
-      active = (active + 1) % slides.length;
-      slides[active].hidden = false;
-      schedule();
-    }, 7000);
+    timer = setTimeout(turn, 7000);
   }
   frame.addEventListener('pointerenter', schedule);
   frame.addEventListener('pointerleave', schedule);
