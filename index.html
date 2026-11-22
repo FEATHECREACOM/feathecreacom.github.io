@@ -438,9 +438,6 @@ header{
   background:#6d5044;
   clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px),0 8px,8px 8px);
 }
-.cube-controls:not([hidden]){display:flex;justify-content:center;gap:8px;padding-top:6px}
-.cube-controls button{min-width:48px;min-height:44px;border:1px solid var(--rule);background:#211b20;color:var(--amber);font:inherit;cursor:pointer}
-.cube-controls button:focus-visible{outline:2px solid var(--amber)}
 .hero-window{touch-action:pan-y pinch-zoom;user-select:none;container-type:inline-size;perspective:1500px;background:#130f18;overflow:hidden}
 .hero-cube{position:relative;aspect-ratio:10/7;transform-style:preserve-3d}
 .hero-cube a{position:absolute;inset:0;backface-visibility:hidden;}
@@ -557,10 +554,6 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
               <span class="hero-art-label" data-en="Play the demo →">体験版を遊ぶ →</span>
             </a>
           </div>
-        </div>
-        <div class="cube-controls" hidden>
-          <button type="button" data-step="-1" aria-label="前の作品" data-en-aria-label="Previous game">◀</button>
-          <button type="button" data-step="1" aria-label="次の作品" data-en-aria-label="Next game">▶</button>
         </div>
       </figure>
     </div>
@@ -875,7 +868,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let gesture;
   let suppressClick = false;
-  async function turn(step = 1){
+  async function turn(step = 1, keyboard = false){
     if (cube.classList.contains('turning')) return;
     clearTimeout(timer);
     const front = slides[active];
@@ -899,6 +892,7 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
     }
     front.hidden = true;
     side.removeAttribute('tabindex');
+    if (keyboard && (document.activeElement === document.body || document.activeElement === front)) side.focus({preventScroll:true});
     schedule();
   }
   function schedule(){
@@ -908,10 +902,11 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
         (matchMedia('(hover: hover)').matches && frame.matches(':hover'))) return;
     timer = setTimeout(turn, 7000);
   }
-  const controls = frame.querySelector('.cube-controls');
-  controls.hidden = false;
-  controls.querySelectorAll('button').forEach(button => {
-    button.addEventListener('click', () => turn(Number(button.dataset.step)));
+  cube.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    turn(event.key === 'ArrowLeft' ? -1 : 1, true);
   });
   cube.addEventListener('dragstart', event => event.preventDefault());
   cube.addEventListener('pointerdown', event => {
