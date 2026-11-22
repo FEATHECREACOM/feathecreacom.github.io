@@ -451,6 +451,19 @@ header{
 .hero-art a[hidden]{display:none}
 .hero-art a:focus-visible{outline:3px solid var(--amber);outline-offset:-3px}
 .hero-art img{display:block;width:100%;aspect-ratio:10/7;height:auto;object-fit:cover;image-rendering:pixelated}
+.hero-art-title{
+  position:absolute;
+  top:4%;left:4%;
+  color:#fff;
+  font-size:clamp(22px,8cqw,48px);
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  -webkit-text-stroke:4px #080709;
+  paint-order:stroke fill;
+  text-shadow:2px 3px #080709;
+}
 .hero-art-label{
   position:absolute;
   right:8px;
@@ -530,7 +543,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
             <a href="games/gloamwell/" aria-label="洞窟探索を遊ぶ" data-en-aria-label="Play Gloamwell">
               <img src="games/gloamwell/preview.jpg" width="700" height="490" fetchpriority="high"
                 alt="ランタンで壁画を照らす灯守" data-en-alt="The Wickkeeper lights a cave painting with a lantern">
-              <span class="hero-art-label" data-en="Gloamwell →">洞窟探索 →</span>
+              <span class="hero-art-title" data-en="Gloamwell">洞窟探索</span>
+              <span class="hero-art-label" data-en="Play →">遊ぶ →</span>
             </a>
             <a href="games/deepsea/" hidden aria-label="深海探査を遊ぶ" data-en-aria-label="Play Deep Sea Survey">
               <img class="sea-cover" src="games/deepsea/ogp.png" width="1200" height="630" alt="">
@@ -539,7 +553,8 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
             <a href="nameless-depths/" hidden aria-label="Nameless Depthsの体験版を遊ぶ" data-en-aria-label="Play the Nameless Depths demo">
               <img src="images/nameless-depths-home.webp" width="700" height="490"
                 alt="紫の炎がともる石畳の広場に立つ主人公" data-en-alt="The player stands in a stone plaza lit by a purple flame">
-              <span class="hero-art-label">Nameless Depths →</span>
+              <span class="hero-art-title" lang="en">Nameless Depths</span>
+              <span class="hero-art-label" data-en="Play the demo →">体験版を遊ぶ →</span>
             </a>
           </div>
         </div>
