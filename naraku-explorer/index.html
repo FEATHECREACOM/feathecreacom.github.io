@@ -1,35 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Naraku Explorer Demo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Silkscreen&display=swap">
 <style>
-/* 全画面のゲーム画面。ドット絵の闇の奈落に、HUDだけを四隅に置く */
-/* ボタン・入力欄は、ブラウザの決まりで文字の設定を受け継がないので、まわりのドットの書体を受け継がせる（Version 287） */
 button,input,select,textarea{font-family:inherit}
 :root{
-  --void:#06070d;
-  --panel:rgba(12,11,20,.82);
-  --line:#3b3654;
-  --ink:#ece6f6;
-  --dim:#9a93b3;
-  --ember:#f2a74b;
-  --gold:#e9c45e;
-  --violet:#a982e6;
-  --heal:#5fcf8a;
-  --font-jp:"DotGothic16","Hiragino Kaku Gothic ProN","Yu Gothic",monospace;
-  --font-px:"Silkscreen","DotGothic16",monospace;
-  color-scheme:dark;
+--void:#06070d;
+--panel:rgba(12,11,20,.82);
+--line:#3b3654;
+--ink:#ece6f6;
+--dim:#9a93b3;
+--ember:#f2a74b;
+--gold:#e9c45e;
+--violet:#a982e6;
+--heal:#5fcf8a;
+--font-jp:"DotGothic16","Hiragino Kaku Gothic ProN","Yu Gothic",monospace;
+--font-px:"Silkscreen","DotGothic16",monospace;
+color-scheme:dark;
 }
 html,body{height:100%}
 [hidden]{display:none!important}
-/* Version 277：長押しで文字が選ばれたり、コピーのメニューが出たりしないように（入力欄は除く） */
 *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text}
 body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow:hidden;
-  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));}
+padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));}
 #app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--void);
-  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow:hidden}
+touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow:hidden}
 #view{display:block;image-rendering:pixelated;image-rendering:crisp-edges}
 .panel{background:var(--panel);border:2px solid var(--line);box-shadow:0 0 0 2px #000}
 #hudL{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:calc(10px + env(safe-area-inset-left,0px));display:flex;flex-direction:row;flex-wrap:wrap;gap:5px;align-items:center;max-width:max(160px,calc(100% - 215px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)));pointer-events:none}
@@ -63,13 +64,13 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #toast.show{opacity:1}
 #toast small{display:block;font-size:12px;color:var(--dim)}
 #banner{position:absolute;left:0;right:0;top:36%;text-align:center;font-family:var(--font-px);font-size:44px;letter-spacing:.12em;color:var(--violet);
-  text-shadow:3px 0 #000,-3px 0 #000,0 3px #000,0 -3px #000,4px 4px #2a1440;pointer-events:none;opacity:0}
+text-shadow:3px 0 #000,-3px 0 #000,0 3px #000,0 -3px #000,4px 4px #2a1440;pointer-events:none;opacity:0}
 #banner.show{animation:ban 2.2s steps(12) forwards}
 @keyframes ban{0%{opacity:0;transform:scale(1.6)}15%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0}}
 #stick{position:absolute;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:2px solid rgba(236,230,246,.35);background:rgba(10,9,18,.25);pointer-events:none;display:none}
 #stick .knob{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:rgba(236,230,246,.55);border:2px solid #000}
 #attack{position:absolute;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(26px + env(safe-area-inset-bottom,0px));width:78px;height:78px;
-  font-family:var(--font-jp);font-size:17px;color:var(--ink);background:rgba(60,30,40,.78);border:3px solid #c9566a;box-shadow:0 0 0 2px #000,inset 0 -5px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
+font-family:var(--font-jp);font-size:17px;color:var(--ink);background:rgba(60,30,40,.78);border:3px solid #c9566a;box-shadow:0 0 0 2px #000,inset 0 -5px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
 #attack:active,#attack.down{transform:translateY(2px);box-shadow:0 0 0 2px #000,inset 0 -2px 0 rgba(0,0,0,.35)}
 #help{position:absolute;left:calc(12px + env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 230px);font-size:11px;line-height:1.5;color:var(--dim);padding:4px 8px;pointer-events:none}
 #result{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,12,.62);padding:16px}
@@ -86,7 +87,7 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #resNext{margin-top:6px;font-family:var(--font-jp);font-size:15px;color:#14101c;background:var(--gold);border:2px solid #000;padding:9px 12px;cursor:pointer}
 #resNext:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 #guard{position:absolute;right:calc(20px + 78px + 14px + env(safe-area-inset-right,0px));bottom:calc(32px + env(safe-area-inset-bottom,0px));width:66px;height:66px;
-  font-family:var(--font-jp);font-size:15px;color:var(--ink);background:rgba(28,36,68,.78);border:3px solid #5a7fd0;box-shadow:0 0 0 2px #000,inset 0 -5px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
+font-family:var(--font-jp);font-size:15px;color:var(--ink);background:rgba(28,36,68,.78);border:3px solid #5a7fd0;box-shadow:0 0 0 2px #000,inset 0 -5px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
 #guard.down{transform:translateY(2px);background:rgba(50,70,130,.85)}
 .hpchip{gap:8px}
 .hpbar{position:relative;display:block;width:84px;height:9px;background:#2a1820;border:1px solid #000}
@@ -213,7 +214,7 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 @keyframes dmgUp{0%{transform:translate(-50%,-30%) scale(1.3)}20%{transform:translate(-50%,-110%) scale(1)}70%{opacity:1}100%{transform:translate(-50%,-160%);opacity:0}}
 @media (prefers-reduced-motion: reduce){.dmg{animation-duration:.8s}}
 #pop{position:absolute;left:0;right:0;top:25%;text-align:center;font-family:var(--font-px);font-size:20px;letter-spacing:.06em;color:var(--ink);
-  text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000;pointer-events:none;opacity:0}
+text-shadow:2px 0 #000,-2px 0 #000,0 2px #000,0 -2px #000;pointer-events:none;opacity:0}
 #pop.just{color:var(--gold);font-size:30px;text-shadow:0 0 0 #000,2px 2px 0 #000}
 #pop.counter{color:#ffb040;font-size:30px;text-shadow:2px 2px 0 #000}
 #pop.x2{font-family:var(--font-jp);color:#ffd060;font-size:24px;text-shadow:2px 2px 0 #000}
@@ -226,10 +227,10 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #result.dead .px{color:#d0524a}
 #resLoot li.lost span:first-child{text-decoration:line-through;color:var(--dim)}
 #step{position:absolute;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(26px + 78px + 14px + env(safe-area-inset-bottom,0px));width:66px;height:52px;padding:0;white-space:nowrap;
-  font-family:var(--font-jp);font-size:13px;color:var(--ink);background:rgba(30,60,70,.78);border:3px solid #6fc8e0;box-shadow:0 0 0 2px #000,inset 0 -4px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
+font-family:var(--font-jp);font-size:13px;color:var(--ink);background:rgba(30,60,70,.78);border:3px solid #6fc8e0;box-shadow:0 0 0 2px #000,inset 0 -4px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
 #step.down{transform:translateY(2px)}
 #jumpB{position:absolute;right:calc(20px + 78px + 14px + 66px + 12px + env(safe-area-inset-right,0px));bottom:calc(32px + env(safe-area-inset-bottom,0px));width:58px;height:58px;padding:0;white-space:nowrap;border-radius:50%;
-  font-family:var(--font-jp);font-size:12px;color:var(--ink);background:rgba(30,50,80,.78);border:3px solid #6ab0f0;box-shadow:0 0 0 2px #000,inset 0 -4px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
+font-family:var(--font-jp);font-size:12px;color:var(--ink);background:rgba(30,50,80,.78);border:3px solid #6ab0f0;box-shadow:0 0 0 2px #000,inset 0 -4px 0 rgba(0,0,0,.35);cursor:pointer;touch-action:none}
 #jumpB.down{transform:translateY(2px)}
 .dbg{font-family:var(--font-jp);font-size:11px;color:var(--dim);background:var(--panel);border:1px dashed var(--line);padding:3px 7px;cursor:pointer}
 #flag{font-family:var(--font-jp);font-size:14px;color:#14101c;background:#ece6f6;border:2px solid #000;box-shadow:0 0 0 2px var(--line);padding:6px 12px;cursor:pointer}
@@ -261,20 +262,18 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #resSave .srow button.arm,#bBody .row.smith .two button.del.arm{background:#d0524a;color:#fff}
 #resSave button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 #setBtn{position:absolute;right:calc(20px + 78px + 14px + env(safe-area-inset-right,0px));bottom:calc(26px + 78px + 14px + env(safe-area-inset-bottom,0px));width:66px;height:52px;padding:0;
-  font-family:var(--font-jp);font-size:13px;color:var(--ink);background:rgba(60,50,30,.8);border:3px solid var(--gold);box-shadow:0 0 0 2px #000;cursor:pointer;touch-action:none}
+font-family:var(--font-jp);font-size:13px;color:var(--ink);background:rgba(60,50,30,.8);border:3px solid var(--gold);box-shadow:0 0 0 2px #000;cursor:pointer;touch-action:none}
 #setbar{position:absolute;left:calc(12px + env(safe-area-inset-left,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));display:flex;gap:6px}
-/* スマホ（指で操作）：左下は移動専用。SETは右手側の切り替えボタン1つ、キー操作の説明は出さない */
 @media (pointer:coarse){#help,#setbar{display:none !important}}
 @media (pointer:fine){#setBtn{display:none !important}}
 #setbar button{display:inline-flex;align-items:center;gap:3px;height:34px;min-width:46px;padding:0 6px;font-family:var(--font-px);font-size:11px;color:var(--ink);background:rgba(20,18,30,.85);border:2px solid var(--line);box-shadow:0 0 0 2px #000;cursor:pointer;touch-action:none}
 #setbar button.on{border-color:var(--gold);color:var(--gold);background:rgba(60,50,30,.85)}
 #setbar button:disabled{opacity:.4;cursor:default}
-#setbar .ssi,#setBtn .ssi{width:22px;height:22px;image-rendering:pixelated;flex:none;pointer-events:none}/* Version 338：持ち替え先の武器の小さな絵 */
+#setbar .ssi,#setBtn .ssi{width:22px;height:22px;image-rendering:pixelated;flex:none;pointer-events:none}
 #setBtn{display:inline-flex;align-items:center;justify-content:center;gap:2px}#setBtn .ssa{font-size:10px;opacity:.75}
 #gearBtn{font-family:var(--font-jp);font-size:13px;color:var(--ink);padding:5px 10px;cursor:pointer;background:var(--panel);border:2px solid var(--line);box-shadow:0 0 0 2px #000}
 #setbar button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 #itembar{position:absolute;right:0;bottom:0;width:0;height:0}
-/* アイテムの枠：SETとステップの上に、左から1・2・3と横一列。4〜6は、その上の2段目に同じ並びで（左下のスティックの場所には置かない） */
 #itembar .islot{position:absolute;width:48px;height:48px;border-radius:50%}
 #itembar .islot b{right:9px;bottom:3px}
 #itembar .islot:nth-child(3n+1){right:calc(128px + env(safe-area-inset-right,0px))}
@@ -482,7 +481,6 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #fitBar .seg button[aria-pressed="true"]{color:#14101c;background:var(--gold)}
 #fitHint{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:11px;color:var(--dim);pointer-events:none}
 #fitPanel{flex:0 0 auto;background:var(--panel);border-top:2px solid var(--line);padding:10px calc(10px + env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:8px}
-/* 武器のセット（タブで切りかわるのは右手と左手だけ）と、防具（共通）を分けて見せる（Version 235） */
 #app:has(#fitScreen:not([hidden])) #setbar,#app:has(#fitScreen:not([hidden])) #setBtn{display:none}
 #fitWeap{display:flex;flex-direction:column;gap:6px;padding:6px;border:2px solid var(--gold);background:rgba(40,34,20,.35)}
 .fith{font-size:11px;color:var(--dim);letter-spacing:.05em}
@@ -584,7 +582,6 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #bBody .slot{display:flex;flex-direction:column;gap:2px;text-align:left;font-family:var(--font-jp);font-size:14px;color:var(--ink);background:#1b1a29;border:2px solid var(--line);padding:6px 8px;cursor:pointer;min-width:0}
 #bBody .slot small{font-size:11px;color:var(--dim)}
 #bBody .slot.pack{cursor:default}
-/* 拠点：BOXボタンの左に、持ち込むアイテム（自動補充のあとの数）。押すとBOXでその枠を選び直す */
 #basePack{display:none;position:absolute;right:0;bottom:0;width:0;height:0;z-index:5}
 #app.inbase #basePack{display:block}
 #app.talking #basePack,#app.fittingOn #basePack,#app.cmpOn #basePack{display:none}
@@ -605,11 +602,8 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #bBody button:focus-visible,#btabs button:focus-visible,.islot:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 #err{position:absolute;inset:auto 16px 50% 16px;text-align:center;color:var(--ink);display:none}
 @media (prefers-reduced-motion: reduce){#banner.show{animation-duration:1.2s}}
-/* 鍛冶屋の比べ（Version 290） */
 #bBody small.scmp{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:11px;color:var(--dim);margin-top:2px}.scmp .sh{color:var(--ink)}.scmp b{font-weight:normal;color:var(--ink)}.scmp b.up{color:#7fe07a}.scmp b.down{color:#ff8a7a}.scmp .pj{opacity:.8}
-/* アクセサリを拾ったとき（Version 293） */
 #offer.acc .od{display:flex;flex-direction:column;gap:3px;text-align:left}#offer.acc .od .oslot{font-size:11px;color:var(--dim)}#offer.acc .od .ogood{color:var(--ink)}#offer.acc .od .obad{color:#ff8a7a}#offer.acc .od .onow{margin-top:4px;font-size:12px;color:var(--dim)}#offer.acc .od .onote{font-size:11px;color:var(--dim)}
-/* 試着室（Version 293）：上は細い帯、動きと大きさのボタンは姿の下、欄はタブで分ける */
 #fitBar{top:auto !important;bottom:6px;justify-content:center}
 #fitHint{display:none}
 #fitTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
@@ -620,26 +614,19 @@ body{background:var(--void);color:var(--ink);font-family:var(--font-jp);overflow
 #fitScreen.cmp #fitTabs,#fitScreen.listing #fitTabs{display:none}
 #fitSlots{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
 #fitArmH{margin-top:0;font-size:11px;color:var(--dim)}
-/* 見た目の物を拾ったとき（Version 296） */
 #offer.cos .on{background:linear-gradient(90deg,#ff8a8a,#ffd06a,#a0ff9a,#8ad0ff,#c8a0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-/* Version 298：画面回転のボタンはなくした */
 #rotBar{display:none !important}
-/* 拠点の設定（Version 298） */
 #setBox{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,12,.7);padding:16px;z-index:30}#setBox[hidden]{display:none}
 #setBox .bmpanel{width:min(340px,100%);max-height:90%;display:flex;flex-direction:column;gap:8px}
 #setList{display:flex;flex-direction:column;gap:8px;align-items:stretch}#setList .chip{justify-content:center;text-align:center}
 #setList .wipeGap{height:10px}
 #cfgBtn{font-family:var(--font-jp);font-size:13px;color:var(--ink);cursor:pointer;padding:5px 10px}
-/* 体験版の終わり（Version 301） */
 #demoEnd{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(320px,calc(100% - 32px));padding:18px 16px 14px;z-index:40;text-align:center;display:flex;flex-direction:column;gap:14px}
 #demoEnd .de1{font-size:15px;line-height:1.9}#demoEnd .ob{display:flex;gap:8px;justify-content:center}
 #demoEnd button{font-family:var(--font-jp);font-size:14px;padding:8px 12px;background:#2a2740;color:var(--ink);border:2px solid #000;box-shadow:0 0 0 2px var(--line);cursor:pointer}#demoEnd #deSend{color:#14101c;background:var(--gold)}
-/* 著作権の表示（Version 302） */
 #tapStart .tsc{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;font-size:11px;color:#6a6680;letter-spacing:.08em}
 .setCopy{margin:6px 0 0;font-size:11px;line-height:1.6;color:var(--dim);text-align:center}.setCred{display:block;margin-top:8px;font-size:10px;opacity:.8}
-/* 「次へ」にキーの印（Version 303・パソコンだけ） */
 @media (pointer:fine){#bBody [data-act="ghostNext"]::after,#springOk::after{content:'Space';margin-left:8px;font-family:var(--font-px);font-size:9px;opacity:.55;letter-spacing:.05em}}
-/* 試着室の装備の説明（Version 306） */
 #fitTip{position:absolute;z-index:20;box-sizing:border-box;padding:8px 10px;background:rgba(12,11,20,.96);border:2px solid var(--line);box-shadow:0 0 0 2px #000;font-size:12px;line-height:1.6;color:var(--ink);pointer-events:none}#fitTip[hidden]{display:none}
 #fitTip b{display:block;font-size:13px;color:var(--gold);font-weight:normal;margin-bottom:2px}#fitTip .tb{color:#ff8a7a}#fitTip .td{color:var(--dim)}
 #fitScreen .fslot .mid{-webkit-touch-callout:none}
